@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
-use App\Models\Meal;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
@@ -12,7 +12,8 @@ class MealController extends Controller
      */
     public function index()
     {
-        return view('dashboard.cafeteria.index');
+        //
+        return view('client.cafeteria.index');
 
     }
 
@@ -35,15 +36,15 @@ class MealController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Meal $meal)
+    public function show(string $id)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Meal $meal)
+    public function edit(string $id)
     {
         //
     }
@@ -51,7 +52,7 @@ class MealController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Meal $meal)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,7 +60,7 @@ class MealController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Meal $meal)
+    public function destroy(string $id)
     {
         //
     }

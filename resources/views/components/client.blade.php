@@ -55,7 +55,7 @@
                 <div class="hidden md:block">
                     <ul class="flex items-center space-x-8">
                         <li><a href="#" class="text-white">Home</a></li>
-                        <li><a href="#" class="text-white">Library</a></li>
+                        <li><a href="{{route('librarys.index')}}" class="text-white">Library</a></li>
                         <li><a href="#" class="text-white">Cafeteria</a></li>
                         <li><a href="#" class="text-white">My place</a></li>
                     </ul>
@@ -65,8 +65,8 @@
                     <button class="flex items-center focus:outline-none" id="profileDropdownButton">
                         <img src="/storage/hero.jpg" alt="Profile Picture"
                             class="w-10 h-10 rounded-full object-cover mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white  hidden md:block" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white  hidden md:block"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
@@ -99,6 +99,11 @@
 
         </nav>
     </header>
+    <main class="h-full ml-3 mt-14 mb-10 mr-3 md:m-8 md:mt-20">
+        {{ $slot }}
+    </main>
+    
+    @stack('scripts')
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

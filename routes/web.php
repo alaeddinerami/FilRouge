@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\PasswordController;
 use App\Http\Controllers\auth\RegisterController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
+use  App\Http\Controllers\client\MealController as ClientMealController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +30,10 @@ Route::resource('/room',RoomController::class);
 Route::get('/roomreservations', [RoomController::class, 'roomResirvation'])->name('room.roomResirvation');
 
 Route::resource('/client',ClientController::class);
+Route::resource('/meals',ClientMealController::class);
+
+
+Route::resource('/librarys',ArticleController::class);
 
 Route::resource('/register',RegisterController::class);
 Route::resource('/login',LoginController::class);
