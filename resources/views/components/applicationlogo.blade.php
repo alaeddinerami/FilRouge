@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs"
-    version="1.1"  viewBox="0 0 1500 757" {{ $attributes }}>
+    version="1.1" viewBox="0 0 1500 757" {{ $attributes }}>
     <g transform="matrix(1,0,0,1,-0.9090909090909918,0.47335114631067654)"><svg xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 396 200" data-background-color="#ffffff"
             preserveAspectRatio="xMidYMid meet" height="757" width="1500">
