@@ -24,20 +24,22 @@
             <div class="flex items-center justify-between">
                 <div class="text-white font-bold text-xl">
                     <a href="/">
-                        <x-applicationlogo class="w-20 h-20 fill-current text-gray-500" />
+                        <x-applicationlogo class="w-20 h-14 fill-current text-gray-500" />
                     </a>
                 </div>
                 <div class="hidden md:block">
                     <ul class="flex items-center space-x-8">
-                        <li><a href="#" class="text-white">Home</a></li>
-                        <li><a href=" {{route('login.index')}} "
-                                class="font-semibold text-gray-200 hover:text-gray-900 border p-2 border-white dark:text-gray-200 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                                in</a></li>
-                        <li><a href="{{route('register.index')}}"
-                                class="ml-4 font-semibold text-gray-200 border p-2 border-white hover:text-gray-900 dark:text-gray-200 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                        </li>
-
-                    </ul>
+                        @auth
+                            <li><a href="#" class="text-white">Home</a></li>
+                        @else
+                            <li><a href=" {{ route('login.index') }} "
+                                    class="font-semibold text-gray-200 hover:text-gray-900 border p-2 border-white dark:text-gray-200 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                                    in</a></li>
+                            <li><a href="{{ route('register.index') }}"
+                                    class=" font-semibold text-gray-200 border p-2 border-white hover:text-gray-900 dark:text-gray-200 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                            </li>
+                        </ul>
+                    @endauth
                 </div>
                 <div class="flex md:hidden">
                     <button class="outline-none mobile-menu-button">
@@ -52,11 +54,13 @@
                 <ul class="mt-4 space-y-4">
                     <li><a href="#" class="block px-4 py-2 text-white bg-gray-900 rounded">Home</a></li>
                     <li><a href="
-                        {{route('login.index')}}
-                        " class="block px-4 py-2 text-white bg-gray-900 rounded">Log in </a></li>
+                        {{ route('login.index') }}
+                        "
+                            class="block px-4 py-2 text-white bg-gray-900 rounded">Log in </a></li>
                     <li><a href="
-                        {{route('register.index')}}
-                        " class="block px-4 py-2 text-white bg-gray-900 rounded">Register</a></li>
+                        {{ route('register.index') }}
+                        "
+                            class="block px-4 py-2 text-white bg-gray-900 rounded">Register</a></li>
 
                 </ul>
             </div>
@@ -172,7 +176,8 @@
                             Pellentesque sed nulla porttitor, porttitor arcu ut, dictum augue. Vestibulum consequat in
                             urna in bibendum. Praesent sed magna risus. Nunc elementum in mauris ac pharetra. Ut blandit
                             ut lorem sit amet rutrum. Vivamus ut purus fringilla, euismod nibh ut, blandit.</p>
-                        <p class="text-gray-600">Nunc ac efficitur sapien. Mauris eu lectus odio. Mauris ac erat tortor.
+                        <p class="text-gray-600">Nunc ac efficitur sapien. Mauris eu lectus odio. Mauris ac erat
+                            tortor.
                             Nulla consectetur commodo justo. Pellentesque eget ornare quam. Pellentesque sodales metus
                             non semper luctus. Praesent non ornare tellus, eget vulputate tellus. Donec luctus non
                             sapien sed semper.</p>
@@ -195,7 +200,8 @@
                             Pellentesque sed nulla porttitor, porttitor arcu ut, dictum augue. Vestibulum consequat in
                             urna in bibendum. Praesent sed magna risus. Nunc elementum in mauris ac pharetra. Ut blandit
                             ut lorem sit amet rutrum. Vivamus ut purus fringilla, euismod nibh ut, blandit.</p>
-                        <p class="text-gray-600">Nunc ac efficitur sapien. Mauris eu lectus odio. Mauris ac erat tortor.
+                        <p class="text-gray-600">Nunc ac efficitur sapien. Mauris eu lectus odio. Mauris ac erat
+                            tortor.
                             Nulla consectetur commodo justo. Pellentesque eget ornare quam. Pellentesque sodales metus
                             non semper luctus. Praesent non ornare tellus, eget vulputate tellus. Donec luctus non
                             sapien sed semper.</p>

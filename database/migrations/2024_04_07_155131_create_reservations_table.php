@@ -10,12 +10,13 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+    {   
+        Schema::disableForeignKeyConstraints();
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('student_id');
+            $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->unsignedInteger('room_id');
+            $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->enum('resirvation',['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();

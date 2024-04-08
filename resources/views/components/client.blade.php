@@ -83,7 +83,12 @@
                         id="profileDropdownMenu">
                         <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
                         <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a></li>
-                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a></li>
+                        <li>
+                            <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <a href="#" onclick="document.getElementById('logoutForm').submit()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 <!-- End Profile Picture Dropdown -->
@@ -101,7 +106,8 @@
                     <li><a href="#" class="block px-4 py-2 text-white bg-gray-900 rounded">Home</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a></li>
-                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a></li>
+                    <li><a href="{{ route('logout') }}"
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a></li>
                 </ul>
             </div>
 

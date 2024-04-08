@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -30,6 +34,29 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:8',
+            'role' => 'required|in:student',
+        ]);
+
+        /*
+        Database Insert
+        */
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+        // dd($user);
+
+        Auth::login($user);
+
+        return $request->role == 'student' ? redirect('/librarys') : redirect('/users');
+    
     }
 
     /**
