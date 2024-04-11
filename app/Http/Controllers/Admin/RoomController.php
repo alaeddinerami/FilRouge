@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Meal;
+use App\Models\Room;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class MealController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.cafeteria.index');
+        return view('dashboard.logement.index');
 
     }
 
@@ -35,15 +36,15 @@ class MealController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Meal $meal)
+    public function show(Room $room)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Meal $meal)
+    public function edit(Room $room)
     {
         //
     }
@@ -51,7 +52,7 @@ class MealController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Meal $meal)
+    public function update(Request $request, Room $room)
     {
         //
     }
@@ -59,8 +60,12 @@ class MealController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Meal $meal)
+    public function destroy(Room $room)
     {
         //
+    }
+
+    public function roomResirvation(){
+        return view('dashboard.reservation.index');
     }
 }

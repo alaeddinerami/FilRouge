@@ -20,7 +20,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('vite')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/LogoutButton.js'])
 
 
     <style>
@@ -53,47 +53,32 @@
 
                     <x-applicationlogo class="block h-9 w-auto fill-current text-white" />
                 </a>
-                <div class="flex justify-end items-center h-14 bg-blue-800 header-right">
-
-                    <div class=" sm:flex sm:items-center sm:ms-6">
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
+                <div class=" flex items-center justify-center">
+                    <div class="relative group">
+                        <button id="dropdown-button"
+                            class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-blue-900   rounded-md shadow-sm ">
+                            <span class="mr-2 text-white">{{ Auth::user()->name }}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 -mr-1 text-white"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="dropdown-menu"
+                            class=" absolute px-3  right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 p-1 space-y-1">
+                            <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                {{-- <a href="#" onclick="document.getElementById('logoutForm').submit()"
+                                    class="block px-4 p-1 text-gray-700 hover:bg-gray-100  active:bg-blue-100 cursor-pointer rounded-md">Logout</a> --}}
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-semibold rounded-md text-gray-100 bg-blue-900 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                    <div>
-                                        {{-- {{ Auth::user()->name }} --}}Admin
-                                    </div>
-
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
-
-                            <x-slot name="content">
-                                {{-- <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
-                                </x-dropdown-link> --}}
-
-                                <!-- Authentication -->
-                                {{-- <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form> --}}
-                            </x-slot>
-                        </x-dropdown>
+                                    class="block px-4 p-1 text-gray-700 hover:bg-gray-100  active:bg-blue-100 cursor-pointer rounded-md">logout</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
             <!-- ./Header -->
 
@@ -112,13 +97,13 @@
                                 class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                                 <span class="inline-flex justify-center items-center ml-4">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"> 
+                                        xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                                         </path>
-                                    
-                                        
-                                        
+
+
+
                                     </svg>
                                 </span>
                                 <span class="ml-2 text-sm tracking-wide truncate">Dashboard</span>
@@ -135,7 +120,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         version="1.0" id="Layer_1" class=" w-5 h-5" viewBox="0 0 64 64"
                                         enable-background="new 0 0 64 64" xml:space="preserve">
-                                        
+
                                         <g>
                                             <path fill="#ffffff"
                                                 d="M18,10v54h9V53c0-0.553,0.447-1,1-1h8c0.553,0,1,0.447,1,1v11h9V20V4c0-2.211-1.789-4-4-4H22   c-2.211,0-4,1.789-4,4V10z M34,9c0-0.553,0.447-1,1-1h4c0.553,0,1,0.447,1,1v4c0,0.553-0.447,1-1,1h-4c-0.553,0-1-0.447-1-1V9z    M34,19c0-0.553,0.447-1,1-1h4c0.553,0,1,0.447,1,1v4c0,0.553-0.447,1-1,1h-4c-0.553,0-1-0.447-1-1V19z M34,29c0-0.553,0.447-1,1-1   h4c0.553,0,1,0.447,1,1v4c0,0.553-0.447,1-1,1h-4c-0.553,0-1-0.447-1-1V29z M34,39c0-0.553,0.447-1,1-1h4c0.553,0,1,0.447,1,1v4   c0,0.553-0.447,1-1,1h-4c-0.553,0-1-0.447-1-1V39z M24,9c0-0.553,0.447-1,1-1h4c0.553,0,1,0.447,1,1v4c0,0.553-0.447,1-1,1h-4   c-0.553,0-1-0.447-1-1V9z M24,19c0-0.553,0.447-1,1-1h4c0.553,0,1,0.447,1,1v4c0,0.553-0.447,1-1,1h-4c-0.553,0-1-0.447-1-1V19z    M24,29c0-0.553,0.447-1,1-1h4c0.553,0,1,0.447,1,1v4c0,0.553-0.447,1-1,1h-4c-0.553,0-1-0.447-1-1V29z M24,39c0-0.553,0.447-1,1-1   h4c0.553,0,1,0.447,1,1v4c0,0.553-0.447,1-1,1h-4c-0.553,0-1-0.447-1-1V39z" />
@@ -241,12 +226,12 @@
                             <a href="{{ route('room.roomResirvation') }}"
                                 class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                                 <span class="inline-flex justify-center items-center ml-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg"  class="w-5 h-5"
-                                        viewBox="0 0 192 192" fill="#ffffff">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 192 192"
+                                        fill="#ffffff">
                                         <defs>
                                             <linearGradient id="a" x1="16" x2="176"
                                                 y1="96" y2="96" gradientUnits="userSpaceOnUse">
-                                                <stop offset="0"  />
+                                                <stop offset="0" />
                                             </linearGradient>
                                         </defs>
                                         <path stroke="url(#a)" stroke-linejoin="round" stroke-width="12"
@@ -271,6 +256,25 @@
             </main>
         </div>
     </div>
+    {{-- <script>
+        // JavaScript to toggle the dropdown
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+        let isOpen = true; // Set to true to open the dropdown by default
+
+        // Function to toggle the dropdown state
+        function toggleDropdown() {
+            isOpen = !isOpen;
+            dropdownMenu.classList.toggle('hidden', !isOpen);
+        }
+
+        // Set initial state
+        toggleDropdown();
+
+        dropdownButton.addEventListener('click', () => {
+            toggleDropdown();
+        });
+    </script> --}}
     @stack('scripts')
 </body>
 

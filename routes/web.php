@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\PasswordController;
 use App\Http\Controllers\auth\RegisterController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MealController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\client\ClientController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MealController;
+use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\StudentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\client\MealController as ClientMealController;
+use App\Http\Controllers\client\ArticleController as clientArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::resource('/client', ClientController::class);
     Route::resource('/meals', ClientMealController::class);
-    Route::resource('/librarys', ArticleController::class);
+    Route::resource('/librarys', clientArticleController::class);
 });
 
 Route::middleware('auth')->group(function () {
@@ -44,8 +44,8 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware(['guest'])->group(function () {
 Route::resource('/register', RegisterController::class);
+Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::resource('/login', LoginController::class);
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::resource('/passwordrest', PasswordController::class);
 });
 

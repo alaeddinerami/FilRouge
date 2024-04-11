@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Client;
 
-use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class StudentController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.users.index');
-
+        //
+        return view('client.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(string $id)
     {
         //
     }
@@ -43,7 +43,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(string $id)
     {
         //
     }
@@ -51,7 +51,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,13 +59,8 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(string $id)
     {
         //
-    }
-
-    public function StudentBan(){
-
-        return view('dashboard.users.index');
     }
 }

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\client;
 
-use App\Models\Room;
+use App\Models\Article;
 use Illuminate\Http\Request;
-
-class RoomController extends Controller
+use App\Http\Controllers\Controller;
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Article $article)
     {
-        return view('dashboard.logement.index');
-
+        //
+        return view('client.library.index');
     }
 
     /**
@@ -35,15 +35,16 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show(Article $article)
     {
         //
+        return view('client.library.exploreArticle');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit(Article $article)
     {
         //
     }
@@ -51,7 +52,7 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, Article $article)
     {
         //
     }
@@ -59,12 +60,8 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy(Article $article)
     {
         //
-    }
-
-    public function roomResirvation(){
-        return view('dashboard.reservation.index');
     }
 }

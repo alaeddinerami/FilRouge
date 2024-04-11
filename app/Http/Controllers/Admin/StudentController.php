@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\image;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ImageController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('dashboard.users.index');
+
     }
 
     /**
@@ -34,7 +36,7 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(image $image)
+    public function show(Student $student)
     {
         //
     }
@@ -42,7 +44,7 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(image $image)
+    public function edit(Student $student)
     {
         //
     }
@@ -50,7 +52,7 @@ class ImageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, image $image)
+    public function update(Request $request, Student $student)
     {
         //
     }
@@ -58,8 +60,13 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(image $image)
+    public function destroy(Student $student)
     {
         //
+    }
+
+    public function StudentBan(){
+
+        return view('dashboard.users.index');
     }
 }

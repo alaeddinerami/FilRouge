@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Commande extends Model
 {
     use HasFactory;
+    protected $fillable = ['student_id', 'meal_id'];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function meal()
+    {
+        return $this->belongsTo(Meal::class);
+    }
 }
