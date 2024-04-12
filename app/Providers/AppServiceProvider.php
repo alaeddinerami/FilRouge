@@ -15,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Interfaces\MealInterface',
             'App\Repositories\Implementations\MealRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Interfaces\RoomInterface',
+            'App\Repositories\Implementations\RoomRepository'
+        );
     }
 
     /**

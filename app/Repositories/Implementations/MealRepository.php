@@ -20,6 +20,7 @@ class MealRepository implements MealInterface
     public function update(array $data, Meal $meal)
     {
         $meal->update($data);
+        // dd($meal);
         return $meal;
     }
 

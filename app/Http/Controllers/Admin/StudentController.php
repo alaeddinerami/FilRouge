@@ -11,9 +11,14 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $studentRepository;
+    public function __construct($studentRepository){
+        $this->studentRepository = $studentRepository;
+    }
     public function index()
     {
-        return view('dashboard.users.index');
+        $students = $this->studentRepository->all();
+        return view('dashboard.users.index',compact('students'));
 
     }
 

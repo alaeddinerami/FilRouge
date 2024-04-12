@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
+            $table->integer('roomNumber');
             $table->text('description');
-            $table->float('price');
+            $table->decimal('price');
+            $table->enum('department',['A1','B2']);
             $table->timestamps();
         });
     }

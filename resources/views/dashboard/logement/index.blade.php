@@ -36,14 +36,14 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5" method="post" action="" enctype="multipart/form-data"
+                <form class="p-4 md:p-5" method="post" action="{{ route('room.store') }}" enctype="multipart/form-data"
                     onsubmit="return validateForm()">
                     @csrf
                     <div class="grid gap-6 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="Room number" class="block mb-2 text-sm font-medium text-gray-900">Room
                                 number</label>
-                            <input type="number" name="Room number" id="Room number"
+                            <input type="number" name="roomNumber" id="Room number"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Room number">
                         </div>
@@ -65,8 +65,8 @@
                                 class="block mb-2 text-sm font-medium text-gray-900">Department</label>
                             <select name="department" id="department"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-                                <option value="single">A1</option>
-                                <option value="double">B2</option>
+                                <option value="A1">A1</option>
+                                <option value="B2">B2</option>
                             </select>
                         </div>
                         <div class="col-span-2">
@@ -142,38 +142,39 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <!-- Modal body -->
+                <!-- .......................................edit modal................................... -->
                 <form class="p-4 md:p-5" method="post" action="" id="edit_form" enctype="multipart/form-data"
                     onsubmit="return validateForm()">
                     @csrf
+                    @method('patch')
                     <div class="grid gap-6 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="Room number" class="block mb-2 text-sm font-medium text-gray-900">Room
                                 number</label>
-                            <input type="number" name="Room number" id="Room number"
+                            <input type="number" name="roomNumber" id="edit_roomNumber"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Room number">
                         </div>
                         <div class="col-span-2">
                             <label for="description"
                                 class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                            <textarea name="description" id="description"
+                            <textarea name="description" id="edit_description"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Description"></textarea>
                         </div>
                         <div class="col-span-2">
                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                            <input type="number" name="price" id="price"
+                            <input type="number" name="price" id="edit_price"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="price">
                         </div>
                         <div class="col-span-2">
                             <label for="department"
                                 class="block mb-2 text-sm font-medium text-gray-900">Department</label>
-                            <select name="department" id="department"
+                            <select name="department" id="edit_department"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-                                <option value="single">A1</option>
-                                <option value="double">B2</option>
+                                <option value="A1">A1</option>
+                                <option value="B2">B2</option>
                             </select>
                         </div>
                         <div class="col-span-2">
@@ -197,19 +198,20 @@
             </div>
         </div>
     </div>
-    {{-- display all rooms --}}
+    {{-- ..........................................display all rooms .............................. --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
-
+        @foreach ($rooms as $room)
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img class="w-full h-56 object-cover object-center" src="/storage/hero.jpg" alt="">
+            <img class="w-full h-56 object-cover object-center" src='{{ asset('storage/' . $room->image->path) }}' alt="">
             <div class="p-4">
-                <h2 class="text-xl font-semibold">45</h2>
-                <p class="text-gray-600">fjbobfbsebn iefbojndb efboeb</p>
+                <h2 class="text-xl font-semibold">{{$room->roomNumber}}</h2>
+                <p class="text-gray-600">{{$room->description}}</p>
+                <p class="text-gray-600">{{$room->price}} $</p>
                 <div class="mt-4 flex justify-end gap-5">
-                    <button href=""
+                    <button 
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        data-modal-target="edit-modal" data-modal-toggle="edit-modal">Edit</button>
-                    <form action="" method="POST">
+                        onclick="openEditModal({{$room->id}},'{{$room->roomNumber}}','{{$room->description}}','{{$room->price}}','{{$room->department}}')">Edit</button>
+                    <form action="{{route('room.destroy',$room)}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
@@ -218,44 +220,9 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img class="w-full h-56 object-cover object-center" src="/storage/hero.jpg" alt="">
-            <div class="p-4">
-                <h2 class="text-xl font-semibold">45</h2>
-                <p class="text-gray-600">fjbobfbsebn iefbojndb efboeb</p>
-                <div class="mt-4 flex justify-end gap-5">
-                    <a href=""
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
-                    <form action="" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img class="w-full h-56 object-cover object-center" src="/storage/hero.jpg" alt="">
-            <div class="p-4">
-                <h2 class="text-xl font-semibold">45</h2>
-                <p class="text-gray-600">fjbobfbsebn iefbojndb efboeb</p>
-                <div class="mt-4 flex justify-end gap-5">
-                    <a href=""
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
-                    <form action="" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-
+        @endforeach
     </div>
+
     @stack('vite')
     @vite('resources/js/roomEditModal.js')
 </x-dashboard>

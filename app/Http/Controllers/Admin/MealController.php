@@ -21,7 +21,7 @@ class MealController extends Controller
     public function index()
     {
         $meals = $this->mealRepository->all();
-        return view('dashboard.cafeteria.index',compact('meals'));
+        return view('dashboard.cafeteria.index', compact('meals'));
 
     }
 
@@ -31,7 +31,7 @@ class MealController extends Controller
     public function create()
     {
         //
-        
+
     }
 
     /**
@@ -39,7 +39,7 @@ class MealController extends Controller
      */
     public function store(Mealsrequest $request)
     {
-        
+
         $mealData = $request->only('name', 'description', 'price');
 
         $meal = $this->mealRepository->create($mealData);
@@ -70,9 +70,21 @@ class MealController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Meal $meal)
+    public function update(Mealsrequest $request, Meal $meal)
     {
-        //
+        $mealData = $request->all(); // Get all request data
+
+       
+        $this->mealRepository->update($mealData, $meal);
+    
+        if ($request->hasFile('image')) {
+            $this->updateImg($request->file('image'), $meal);
+        }
+    
+        return redirect()->back()->with([
+            'message' => 'Meal updated successfully!',
+            'operationSuccessful' => true,
+        ]);
     }
 
     /**
@@ -80,6 +92,15 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
-        //
+        $this->deleteImg($meal);
+
+       
+        $this->mealRepository->delete($meal);
+
+        return redirect()->back()->with([
+            'message' => 'Meal deleted successfully!',
+            'operationSuccessful' => true,
+        ]);
+    
     }
 }

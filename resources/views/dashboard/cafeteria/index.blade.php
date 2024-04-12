@@ -241,7 +241,7 @@
                                             data-original="#000000" />
                                     </svg>
                                 </button>
-                                <form class="mt-2" action="" method="POST">
+                                <form class="mt-2" action="{{route('meal.destroy', $meal)}} '" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="mr-4 " title="Delete">
