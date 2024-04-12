@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\User;
+use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
+    use ImageUpload;
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +33,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -45,7 +49,7 @@ class ClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
@@ -62,5 +66,32 @@ class ClientController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function showProfileImg()
+    {
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        // dd($profileData);
+        return view('client.profile.index', compact('profileData'));
+    }
+    public function storeProfileImg(Request $request)
+    {
+        $profileId = $request->id;
+        $profile = User::find($profileId);
+        if ($request->hasFile('image')) {
+            // $this->storeImg($request->file('image'), $profile);
+            $this->updateImg($request->file('image'), $profile);
+            return redirect()->back()->with([
+                'message' => 'Meal created successfully!',
+                'operationSuccessful' => $this->operationSuccessful = true,
+            ]);
+        } else {
+
+            $this->storeImg($request->file('image'), $profile);
+        }
+        return redirect()->back()->with([
+            'message' => 'Meal created successfully!',
+            'operationSuccessful' => $this->operationSuccessful = true,
+        ]);
     }
 }

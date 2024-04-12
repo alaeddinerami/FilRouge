@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -20,7 +23,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('vite')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/StudentProfile.js'])
+    
+
 
 
     <style>
@@ -71,8 +76,13 @@
                 <!-- Profile Picture Dropdown -->
                 <div class="relative" id="profileDropdown">
                     <button class="flex items-center focus:outline-none" id="profileDropdownButton">
-                        <img src="/storage/hero.jpg" alt="Profile Picture"
+                        @if (auth::user()->image == null)
+                        <img src="{{ asset('storage/profile.webp') }}"
+                            class="w-10 h-10 rounded-full object-cover mr-4" alt="">
+                            @else
+                        <img src="{{asset('storage/' . auth::user()->image->path)}}" alt="Profile Picture"
                             class="w-10 h-10 rounded-full object-cover mr-4">
+                            @endif
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white  hidden md:block"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -81,7 +91,7 @@
                     </button>
                     <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 hidden"
                         id="profileDropdownMenu">
-                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
+                        <li><a href="{{route('showProfileImg')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
                         <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a></li>
                         <li>
                             <form id="logoutForm" action="{{ route('logout') }}" method="POST">
@@ -209,43 +219,9 @@
 
 
     @stack('scripts')
+   
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuButton = document.querySelector('.mobile-menu-button');
-            const mobileMenu = document.querySelector('.mobile-menu');
 
-            menuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-            });
-            const profileDropdown = document.getElementById('profileDropdown');
-            const profileDropdownButton = document.getElementById('profileDropdownButton');
-            const profileDropdownMenu = document.getElementById('profileDropdownMenu');
-
-            // Open dropdown menu
-            profileDropdownButton.addEventListener('click', function(event) {
-                event.stopPropagation();
-                profileDropdownMenu.classList.toggle('hidden');
-            });
-
-            // Close dropdown menu when clicking outside
-            document.addEventListener('click', function(event) {
-                const isClickInside = profileDropdown.contains(event.target);
-                if (!isClickInside) {
-                    profileDropdownMenu.classList.add('hidden');
-                }
-            });
-        });
-
-        function toggleAnswer(id) {
-            var answer = document.getElementById('answer' + id);
-            if (answer.style.display === 'none') {
-                answer.style.display = 'block';
-            } else {
-                answer.style.display = 'none';
-            }
-        }
-    </script>
 </body>
 
 </html>

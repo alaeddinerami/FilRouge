@@ -39,7 +39,7 @@ class MealController extends Controller
      */
     public function store(Mealsrequest $request)
     {
-
+        dd($request);
         $mealData = $request->only('name', 'description', 'price');
 
         $meal = $this->mealRepository->create($mealData);

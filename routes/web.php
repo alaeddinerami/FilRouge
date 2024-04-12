@@ -34,6 +34,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::resource('/client', ClientController::class);
+    Route::get('/profile',[ClientController::class,'showProfileImg'])->name('showProfileImg');
+    Route::post('/storeProfileImg',[ClientController::class,'storeProfileImg'])->name('storeProfileImg');
     Route::resource('/meals', ClientMealController::class);
     Route::resource('/librarys', clientArticleController::class);
 });
