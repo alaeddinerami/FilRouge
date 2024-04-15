@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Student extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'isbanned',
+    ];
     public function commandes()
     {
         return $this->hasMany(Commande::class);
@@ -30,5 +35,12 @@ class Student extends Model
     public function articles()
     {
         return $this->hasMany(Article::class);
+    }
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function image(): MorphOne
+    {
+        return $this->morphOne(image::class, 'imageable');
     }
 }

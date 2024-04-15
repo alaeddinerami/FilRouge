@@ -3,16 +3,17 @@
     <form action="{{ route('register.store') }}" method="post">
         @csrf
         <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="name"
-            placeholder="Full Name" required />
+            placeholder="Full Name"  />
+            <x-error-message :messages="$errors->get('name')" class="mb-3"/>
 
         <input type="email" class="block border border-grey-light w-full p-3 rounded mb-4" name="email"
-            placeholder="Email" required />
-
+            placeholder="Email"  />
+            <x-error-message :messages="$errors->get('email')" class="mb-3"/>
         <input type="password" class="block border border-grey-light w-full p-3 rounded mb-4" name="password"
-            placeholder="Password" required />
-
+            placeholder="Password"  />
+            <x-error-message :messages="$errors->get('password')" class="mb-3"/>
         <input type="password" class="block border border-grey-light w-full p-3 rounded mb-4"
-            name="password_confirmation" placeholder="Confirm Password" required />
+            name="password_confirmation" placeholder="Confirm Password"  />
         <input type="hidden" name="role" value="student">
 
         <button type="submit"

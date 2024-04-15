@@ -25,7 +25,6 @@ trait ImageUpload
     public function deleteImg(object $obj)
     {
         if ($obj->image) {
-            // Delete image from storage
             Storage::delete('public/' . $obj->image->path);
             // Delete image record from database
             $obj->image->delete();

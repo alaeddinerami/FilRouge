@@ -2,7 +2,13 @@
 
 namespace App\Repositories\Interfaces;
 
-interface StudentInterface{
+use App\Models\Student;
+use App\Models\User;
+
+interface StudentInterface
+{
     public function all();
-    public function StudentBan();
+    public function StudentBan(User $user);
+    // public function banLogout($id);
+
 }

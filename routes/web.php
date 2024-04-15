@@ -25,19 +25,21 @@ use App\Http\Controllers\client\ArticleController as clientArticleController;
 |
 */
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/users', [StudentController::class, 'StudentBan'])->name('Student.StudentBan');
+    Route::resource('/student',StudentController::class)->only('index');
+    Route::patch('/users/{user}', [StudentController::class, 'StudentBan'])->name('Student.StudentBan');
     Route::resource('/dashboard', DashboardController::class);
     Route::resource('/meal', MealController::class);
     Route::resource('/room', RoomController::class);
     Route::get('/roomreservations', [RoomController::class, 'roomResirvation'])->name('room.roomResirvation');
 });
-
+Route::middleware(['auth','userBan'])->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::resource('/client', ClientController::class);
     Route::get('/profile',[ClientController::class,'showProfileImg'])->name('showProfileImg');
     Route::post('/storeProfileImg',[ClientController::class,'storeProfileImg'])->name('storeProfileImg');
     Route::resource('/meals', ClientMealController::class);
     Route::resource('/librarys', clientArticleController::class);
+});
 });
 
 Route::middleware('auth')->group(function () {

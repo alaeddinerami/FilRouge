@@ -1,4 +1,5 @@
 <x-guest>
+    <x-errorrole ></x-errorrole>
     <h1 class="mb-8 text-3xl text-center">Log in</h1>
 
     <form action="{{ route('login.authenticate') }}" method="post">
@@ -6,9 +7,10 @@
         
         <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" name="email"
             placeholder="Email" />
-
+        
         <input type="password" class="block border border-grey-light w-full p-3 rounded mb-4" name="password"
             placeholder="Password" />
+            <x-error-message :messages="$errors->get('email')" class="mb-3"/>
 
         <button type="submit"
             class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1">Log in</button>

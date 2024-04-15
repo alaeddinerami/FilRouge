@@ -78,20 +78,21 @@ class ClientController extends Controller
     {
         $profileId = $request->id;
         $profile = User::find($profileId);
-        if ($request->hasFile('image')) {
-            // $this->storeImg($request->file('image'), $profile);
+        if ($profile->image == null) {
+            $this->storeImg($request->file('image'), $profile);
             $this->updateImg($request->file('image'), $profile);
             return redirect()->back()->with([
-                'message' => 'Meal created successfully!',
+                'message' => 'Image stored successfully!',
                 'operationSuccessful' => $this->operationSuccessful = true,
             ]);
         } else {
 
-            $this->storeImg($request->file('image'), $profile);
+            $this->updateImg($request->file('image'), $profile);
+            return redirect()->back()->with([
+                'message' => 'Image updated successfully!',
+                'operationSuccessful' => $this->operationSuccessful = true,
+            ]);
         }
-        return redirect()->back()->with([
-            'message' => 'Meal created successfully!',
-            'operationSuccessful' => $this->operationSuccessful = true,
-        ]);
+
     }
 }

@@ -52,11 +52,16 @@ class RegisterController extends Controller
             'role' => $request->role,
         ]);
         // dd($user);
+        if ($request->role == 'student') {
+            $user->students()->create([
+                'user_id' => $user->id
+            ]);
+        }
 
         Auth::login($user);
 
         return $request->role == 'student' ? redirect('/librarys') : redirect('/users');
-    
+
     }
 
     /**
@@ -72,7 +77,7 @@ class RegisterController extends Controller
      */
     public function edit(string $id)
     {
-        
+
     }
 
     /**

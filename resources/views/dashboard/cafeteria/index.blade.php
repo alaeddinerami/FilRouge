@@ -261,6 +261,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{$meals->links()}}
         </div>
     </section>
     @push('vite')

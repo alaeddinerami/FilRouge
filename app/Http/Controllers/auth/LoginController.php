@@ -30,12 +30,22 @@ class LoginController extends Controller
         if (Auth::attempt($validation)) {
             // Authentication successful
             $user = Auth::user();
+            
+            // dd($user->students->isbanned);
             if ($user->role == 'admin') {
                 return redirect()->intended('/dashboard');
-            } else {
-                return redirect()->intended('/librarys');
             }
+            if ($user->role == 'student' ) {
+                return redirect('/librarys');
+            } else {
+                Auth::logout();
+                // abort('401', 'Your account is banned');
+                // Session::flash('error', 'Your account is banned');
+                return redirect('/login')->with('error', 'Your account is banned');
+            }
+
         }
+
 
         // Authentication failed
         return back()->withErrors([

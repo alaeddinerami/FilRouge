@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 class MealController extends Controller
 {
     use ImageUpload;
+
     protected $mealRepository;
 
     public function __construct(MealInterface $mealRepository)
@@ -39,11 +40,11 @@ class MealController extends Controller
      */
     public function store(Mealsrequest $request)
     {
-        dd($request);
-        $mealData = $request->only('name', 'description', 'price');
+       
 
-        $meal = $this->mealRepository->create($mealData);
-        $this->storeImg($request->file('image'), $meal);
+        $meal = $this->mealRepository->store($request);
+        
+      
         // dd($meal);
         return redirect()->back()->with([
             'message' => 'Meal created successfully!',
@@ -72,19 +73,15 @@ class MealController extends Controller
      */
     public function update(Mealsrequest $request, Meal $meal)
     {
-        $mealData = $request->all(); // Get all request data
+        
 
-       
-        $this->mealRepository->update($mealData, $meal);
-    
-        if ($request->hasFile('image')) {
-            $this->updateImg($request->file('image'), $meal);
-        }
-    
-        return redirect()->back()->with([
-            'message' => 'Meal updated successfully!',
-            'operationSuccessful' => true,
-        ]);
+            $this->mealRepository->update($request, $meal);
+
+            return redirect()->back()->with([
+                'message' => 'Meal updated successfully!',
+                'operationSuccessful' => true,
+            ]);
+        
     }
 
     /**
@@ -92,8 +89,6 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
-        $this->deleteImg($meal);
-
        
         $this->mealRepository->delete($meal);
 
@@ -101,6 +96,6 @@ class MealController extends Controller
             'message' => 'Meal deleted successfully!',
             'operationSuccessful' => true,
         ]);
-    
+
     }
 }

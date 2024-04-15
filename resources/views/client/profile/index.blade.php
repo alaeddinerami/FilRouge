@@ -1,5 +1,16 @@
 <x-client>
     <!-- This is an example component -->
+    @if (session()->has('message'))
+        @stack('scripts')
+        <script>
+            Swal.fire({
+                title: '{{ session('operationSuccessful') ? 'Success' : 'Error' }}!',
+                icon: '{{ session('operationSuccessful') ? 'success' : 'error' }}',
+                confirmButtonText: 'Ok',
+                html: '{{ session('message') }}'
+            })
+        </script>
+    @endif
     <div class="border-b-2 bg-slate-50 block md:flex pt-20 pb-7 p-3">
         <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
             <form action="{{ route('storeProfileImg') }}" method="POST" enctype="multipart/form-data">
