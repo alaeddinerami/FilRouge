@@ -34,14 +34,14 @@
             </li>
         </ul>
         {{-- ------------------------------------------------ modal button ------------------------------------------------------- --}}
-    <div class="w-full flex justify-between items-center px-2 mt-4">
-        <p class="text-none text-xl font-semibold indent-4">Menu</p>
-        <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            type="button">
-            Add meal
-        </button>
-    </div>
+        <div class="w-full flex justify-between items-center px-2 mt-4">
+            <p class="text-none text-xl font-semibold indent-4">Menu</p>
+            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                type="button">
+                Add meal
+            </button>
+        </div>
     </div>
 
 
@@ -115,7 +115,7 @@
             </div>
         </div>
     </div>
-    
+
 
     {{-- -------------------------------------------------- edit modal ----------------------------------------------- --}}
 
@@ -131,8 +131,7 @@
                     </h3>
                     <button type="button"
                         class="text-blue-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                        data-modal-toggle="edit-modal"
-                        >
+                        data-modal-toggle="edit-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -215,8 +214,13 @@
                         <tr class="{{ $loop->odd ? 'odd:bg-blue-50' : 'even:bg-blue-100' }}">
                             <td class="px-6 py-3 text-sm">
                                 <div class="flex items-center cursor-pointer">
-                                    <img src='{{ asset('storage/' . $meal->image->path) }}'
-                                        class="w-9 h-9 rounded-full shrink-0" />
+                                    @php
+                                        $imagePath = $meal->image
+                                            ? asset('storage/' . $meal->image->path)
+                                            : asset('storage/empty.jpg');
+
+                                    @endphp
+                                    <img src='{{ $imagePath }}' class="w-9 h-9 rounded-full shrink-0" />
                                     <div class="ml-4">
                                         <p class="text-sm text-black">{{ $meal->name }}</p>
                                     </div>
@@ -229,8 +233,9 @@
                                 <p class="text-xs text-gray-400">{{ $meal->description }}</p>
                             </td>
                             <td class="flex justify-center ml-5 py-5">
-                                <button   onclick="openEditModal({{ $meal->id }},'{{ $meal->name }}','{{ $meal->description }}','{{$meal->price}}')" class="mr-6"
-                                    title="Edit" >
+                                <button
+                                    onclick="openEditModal({{ $meal->id }},'{{ $meal->name }}','{{ $meal->description }}','{{ $meal->price }}')"
+                                    class="mr-6" title="Edit">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
                                         <path
@@ -241,7 +246,7 @@
                                             data-original="#000000" />
                                     </svg>
                                 </button>
-                                <form class="mt-2" action="{{route('meal.destroy', $meal)}} '" method="POST">
+                                <form class="mt-2" action="{{ route('meal.destroy', $meal) }} '" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="mr-4 " title="Delete">
@@ -261,7 +266,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$meals->links()}}
+            {{ $meals->links() }}
         </div>
     </section>
     @push('vite')

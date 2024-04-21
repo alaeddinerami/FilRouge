@@ -9,6 +9,5 @@ interface StudentInterface
 {
     public function all();
     public function StudentBan(User $user);
-    // public function banLogout($id);
 
 }

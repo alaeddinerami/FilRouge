@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Student;
 use App\Models\User;
 use App\Repositories\Interfaces\StudentInterface;
+use App\Services\Interfaces\StudentServiceInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,14 +14,12 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    protected $studentRepository;
-    public function __construct(StudentInterface $studentRepository)
+    public function __construct(public StudentServiceInterface $service)
     {
-        $this->studentRepository = $studentRepository;
     }
     public function index()
     {
-        $students = $this->studentRepository->all();
+        $students = $this->service->all();
         // dd($students);
         return view('dashboard.users.index', compact('students'));
     }
@@ -76,7 +75,7 @@ class StudentController extends Controller
     public function StudentBan(User $user)
     {
 
-         $this->studentRepository->StudentBan($user);
+         $this->service->StudentBan($user);
         if ($user->role =='student') {
             return redirect()->back()->with([
                 'message' => 'student unbanned successfully!',

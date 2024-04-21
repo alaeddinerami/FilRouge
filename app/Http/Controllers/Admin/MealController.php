@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Mealsrequest;
 use App\Models\Meal;
 use App\Repositories\Interfaces\MealInterface;
+use App\Services\Interfaces\MealServiceInterface;
 use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,15 +14,14 @@ class MealController extends Controller
 {
     use ImageUpload;
 
-    protected $mealRepository;
 
-    public function __construct(MealInterface $mealRepository)
+    public function __construct(public MealServiceInterface $service)
     {
-        $this->mealRepository = $mealRepository;
+
     }
     public function index()
     {
-        $meals = $this->mealRepository->all();
+        $meals = $this->service->all();
         return view('dashboard.cafeteria.index', compact('meals'));
 
     }
@@ -40,11 +40,8 @@ class MealController extends Controller
      */
     public function store(Mealsrequest $request)
     {
-       
 
-        $meal = $this->mealRepository->store($request);
-        
-      
+        $meal = $this->service->store($request);
         // dd($meal);
         return redirect()->back()->with([
             'message' => 'Meal created successfully!',
@@ -73,15 +70,14 @@ class MealController extends Controller
      */
     public function update(Mealsrequest $request, Meal $meal)
     {
-        
 
-            $this->mealRepository->update($request, $meal);
 
-            return redirect()->back()->with([
-                'message' => 'Meal updated successfully!',
-                'operationSuccessful' => true,
-            ]);
-        
+        $this->service->update($request, $meal);
+
+        return redirect()->back()->with([
+            'message' => 'Meal updated successfully!',
+            'operationSuccessful' => true,
+        ]);
     }
 
     /**
@@ -89,13 +85,11 @@ class MealController extends Controller
      */
     public function destroy(Meal $meal)
     {
-       
-        $this->mealRepository->delete($meal);
+        $this->service->delete($meal);
 
         return redirect()->back()->with([
             'message' => 'Meal deleted successfully!',
             'operationSuccessful' => true,
         ]);
-
     }
 }

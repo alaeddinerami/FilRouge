@@ -15,89 +15,77 @@
             </script>
         @endpush
     @endif
-       {{-- -------------------------------------------------- edit modal ----------------------------------------------- --}}
+    {{-- -------------------------------------------------- edit modal ----------------------------------------------- --}}
 
-       <div id="edit-modal" tabindex="-1" aria-hidden="true"
-       class="hidden overflow-y-auto overflow-x-hidden fixed  top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-       <div class="relative p-4 w-full max-w-md max-h-full">
-           <!-- Modal content -->
-           <div class="relative bg-white rounded-lg shadow">
-               <!-- Modal header -->
-               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                   <h3 class="text-lg font-semibold text-gray-900">
-                       Edit Article
-                   </h3>
-                   <button type="button"
-                       class="text-blue-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                       data-modal-toggle="edit-modal">
-                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                           viewBox="0 0 14 14">
-                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                               stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                       </svg>
-                       <span class="sr-only">Close modal</span>
-                   </button>
-               </div>
-               <!-- Modal body -->
-               <form class="p-4 md:p-5" method="post" action="" id="edit_form" enctype="multipart/form-data"
-                   onsubmit="return validateForm()">
-                   @csrf
-                   <div class="grid gap-6 mb-4 grid-cols-2">
-                       <div class="col-span-2">
-                           <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name Article
-                           </label>
-                           <input type="name article" name="name" id="name"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                               placeholder="Name article">
-                       </div>
-                       <div class="col-span-2">
-                           <label for="description"
-                               class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                           <textarea name="description" id="description"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                               placeholder="Description"></textarea>
-                       </div>
-                       <div class="col-span-2">
-                           <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                           <input type="file" name="image" :value="old('image')" id="image"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                               placeholder="Actor's full name">
-                       </div>
-                   </div>
-                   <button type="submit"
-                       class="text-white inline-flex justify-center items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full">
-                       <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                           xmlns="http://www.w3.org/2000/svg">
-                           <path fill-rule="evenodd"
-                               d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                               clip-rule="evenodd"></path>
-                       </svg>
-                       <p>Edit Article</p>
-                   </button>
-               </form>
-           </div>
-       </div>
-   </div>
-    <div class="font-[sans-serif] text-gray-800 bg-gray-200 mt-5 rounded-2xl  px-6 py-12">
+    <div id="edit-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed  top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        Edit Article
+                    </h3>
+                    <button type="button"
+                        class="text-blue-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-toggle="edit-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5" action="" id="edit_form" method="POST" enctype="multipart/form-data"
+                    onsubmit="return validateForm()">
+
+                    @csrf
+                    @method('put')
+                    <div class="grid gap-6 mb-4 grid-cols-2">
+                        <div class="col-span-2">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name Article
+                            </label>
+                            <input type="name article" name="title" id="edit_name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="Name article">
+                        </div>
+                        <div class="col-span-2">
+                            <label for="description"
+                                class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                            <textarea name="description" id="edit_description"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="Description"></textarea>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                            <input type="file" name="image" :value="old('image')" id="image"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="Actor's full name">
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="text-white inline-flex justify-center items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full">
+                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <p>Edit Article</p>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="font-[sans-serif] text-gray-800 bg-gray-200 mt-20 rounded-2xl m-5  px-6 py-12">
         <div class="grid lg:grid-cols-2 gap-8 max-lg:max-w-2xl mx-auto">
             <div class="text-left">
-                <h2 class="text-4xl font-extrabold mb-6">Article</h2>
-                <p class="mb-4 text-sm">For the use of digital object identifiers on Wikipedia, see Wikipedia:Digital
-                    Object Identifier.
-                    Digital object identifier
-
-                    Full name Digital object identifier
-                    Acronym DOI
-                    Organisation International DOI Foundation
-                    Introduced 2000; 24 years ago
-                    Example 10.1000/182
-                    Website www.doi.org Edit this at Wikidata
-                    A digital object identifier (DOI) is a persistent identifier or handle used to uniquely identify
-                    various objects, standardized by the International Organization for Standardization (ISO).[1] DOIs
-                    are an implementation of the Handle System;[2][3] they also fit within the URI system (Uniform
-                    Resource Identifier). They are widely used to identify academic, professional, and government
-                    information, such as journal articles, research reports, data sets, and official publications.
-
+                <h2 class="text-4xl font-extrabold mb-6">{{ $art->title }}</h2>
+                <p class="mb-4 text-sm">
+                    {{ $art->description }}
                 </p>
 
                 <div class="grid xl:grid-cols-3 sm:grid-cols-2 gap-8 mt-12">
@@ -155,19 +143,34 @@
                 </div>
 
             </div>
-            <div class="flex justify-center items-center">
-                <img src="/storage/hero.jpg" alt="Placeholder Image" class="rounded-lg object-cover w-full h-full" />
-            </div>
-
+            @if ($art->image)
+                <div class="flex justify-center items-center">
+                    <img src="{{ asset('storage/' . $art->image->path) }}" alt="Placeholder Image"
+                        class="rounded-lg object-cover w-full h-[20rem]" />
+                </div>
+            @else
+                <div class="flex justify-center items-center">
+                    <img src="{{ asset('storage/empty.jpg') }}" alt="Placeholder Image"
+                        class="rounded-lg object-cover w-full h-[20rem]" />
+                </div>
+            @endif
         </div>
-        <button
-        data-modal-target="edit-modal" data-modal-toggle="edit-modal" class="inline-block mt-6 px-6 py-2.5 bg-blue-500 text-white text-base font-medium rounded-md hover:bg-blue-600">Edit
-        </button>
-        <button
-            class="inline-block mt-6 px-6 py-2.5 bg-red-500 text-white text-base font-medium rounded-md hover:bg-red-600">Cancel
-        </button>
+        @if (Auth::user()->id == $art->user_id)
+            <div class="flex">
+                <button onclick="openEditModal({{ $art->id }},'{{ $art->title }}','{{ $art->description }}')"
+                    class="inline-block  mt-6 px-6 py-2.5 bg-blue-500 text-white text-base font-medium rounded-md hover:bg-blue-600">Edit
+                </button>
+                <form action="{{ route('article.destroy', $art) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button
+                        class="inline-block ml-6 mt-6 px-6 py-2.5 bg-red-500 text-white text-base font-medium rounded-md hover:bg-red-600">Delete
+                    </button>
+                </form>
+            </div>
+        @endif
     </div>
     @push('vite')
-    @vite('resources/js/articleEditModal.js')
+        @vite('resources/js/articleEditModel.js')
     @endpush
 </x-client>

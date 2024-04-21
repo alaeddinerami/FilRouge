@@ -201,8 +201,11 @@
     {{-- ..........................................display all rooms .............................. --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
         @foreach ($rooms as $room)
+        @php
+        $imagePath = $room->image ? asset('storage/' . $room->image->path) : asset('storage/empty.jpg');
+        @endphp    
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img class="w-full h-56 object-cover object-center" src='{{ asset('storage/' . $room->image->path) }}' alt="">
+            <img class="w-full h-56 object-cover object-center" src='{{ $imagePath }}' alt="">
             <div class="p-4">
                 <h2 class="text-xl font-semibold">{{$room->roomNumber}}</h2>
                 <p class="text-gray-600">{{$room->description}}</p>

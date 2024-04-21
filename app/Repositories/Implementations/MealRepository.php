@@ -12,33 +12,31 @@ class MealRepository implements MealInterface
     use ImageUpload;
     public function all()
     {
-        return Meal::paginate(2);
+        return Meal::paginate(5);
     }
 
     public function store(Mealsrequest $request)
     {
         $mealData = $request->only('name', 'description', 'price');
         $meal = Meal::create($mealData);
-        $this->storeImg($request->file('image'), $meal);
-        return $meal;
+        if($request->hasFile('image')){
+            $this->storeImg($request->file('image'), $meal);
+        }
     }
 
     public function update(Mealsrequest $request, Meal $meal)
     {
         $mealData = $request->all();
+        $meal->update($mealData);
         if ($request->hasFile('image')) {
+            $this->storeImg($request->file('image'), $meal);
             $this->updateImg($request->file('image'), $meal);
         }
-        $meal->update($mealData);
-        // $meal->save();
-        // dd($mealData);
-        return $meal;
     }
 
     public function delete(Meal $meal)
     {
-        $mealData = Meal::find($meal->id);
         $this->deleteImg($meal);
-        $mealData->delete();
+        $meal->delete();
     }
 }

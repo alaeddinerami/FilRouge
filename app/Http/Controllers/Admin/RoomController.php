@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 use App\Repositories\Interfaces\RoomInterface;
+use App\Services\Interfaces\RoomServiceInterface;
 use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,14 +16,14 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    protected $roomRepository;
-    public function __construct(RoomInterface $roomRepository)
+   
+    public function __construct(public RoomServiceInterface $service)
     {
-        $this->roomRepository = $roomRepository;
+
     }
     public function index()
     {
-        $rooms = $this->roomRepository->all();
+        $rooms = $this->service->all();
         return view('dashboard.logement.index',compact('rooms'));
 
     }
@@ -40,21 +41,16 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request)
     {
-        $roomData = $request->all();
-        // dd($roomData);
-        if ($request->hasFile('image')) {
-            $room = $this->roomRepository->create($roomData);
-            $this->storeImg($request->file('image'), $room);
+        
+
+        $room = $this->service->store($request);
+        
             return redirect()->back()->with([
                 'message' => 'Room created successfully!',
                 'operationSuccessful' => $this->operationSuccessful = true,
             ]);
-        }else{
-            return redirect()->back()->with([
-                'message' => 'You forgot an image',
-                'operationSuccessful' => $this->operationSuccessful = false,
-            ]);
-        }
+        
+        
     }
 
     /**
@@ -78,15 +74,11 @@ class RoomController extends Controller
      */
     public function update(RoomRequest $request, Room $room)
     {
-        $roomData = $request->all(); // Get all request data
-
         // dd($roomData);
-        $this->roomRepository->update($roomData, $room);
-    
+        $this->service->update($request, $room);
         if ($request->hasFile('image')) {
             $this->updateImg($request->file('image'), $room);
         }
-    
         return redirect()->back()->with([
             'message' => 'room updated successfully!',
             'operationSuccessful' => true,
@@ -98,11 +90,11 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        $this->deleteImg($room);
+        // $this->deleteImg($room);
 
         // Delete the meal
-        $this->roomRepository->delete($room);
-
+         $this->service->delete($room);
+        
         return redirect()->back()->with([
             'message' => 'Meal deleted successfully!',
             'operationSuccessful' => true,

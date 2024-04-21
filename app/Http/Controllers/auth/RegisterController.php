@@ -60,7 +60,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return $request->role == 'student' ? redirect('/librarys') : redirect('/users');
+        return $request->role == 'student' ? redirect('/article') : redirect('/users');
 
     }
 

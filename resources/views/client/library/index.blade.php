@@ -1,6 +1,6 @@
 <x-client>
 
-
+    <x-sweetalert></x-sweetalert>
 
     <div id="indicators-carousel" class="relative w-full " data-carousel="static" style="height: 100vh">
         <!-- Carousel wrapper -->
@@ -20,7 +20,7 @@
             </div>
             <!-- Item 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="/storage/hero.jpg"
+                <img src="/storage/hero.jpg" 
                     class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 <div class="absolute inset-0 bg-black opacity-30"></div>
             </div>
@@ -37,20 +37,7 @@
                 <div class="absolute inset-0 bg-black opacity-30"></div>
             </div>
         </div>
-        <!-- Slider indicators -->
-        <div class="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
-                data-carousel-slide-to="0"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
-                data-carousel-slide-to="1"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-                data-carousel-slide-to="2"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
-                data-carousel-slide-to="3"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
-                data-carousel-slide-to="4"></button>
-        </div>
-        <!-- Slider controls -->
+       
         <button type="button"
             class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
             data-carousel-prev>
@@ -103,14 +90,14 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5" method="post" action="" enctype="multipart/form-data"
-                    onsubmit="return validateForm()">
+                <form class="p-4 md:p-5" method="post" action="{{ route('article.store') }}"
+                    enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
                     <div class="grid gap-6 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name Article
+                            <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Name Article
                             </label>
-                            <input type="name article" name="name" id="name"
+                            <input type="text" name="title" id="title"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Name article">
                         </div>
@@ -121,7 +108,7 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Description"></textarea>
                         </div>
-
+                        <input type="hidden" name='user_id'value='{{ Auth::user()->id }}'>
 
                         <div class="col-span-2">
                             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
@@ -146,82 +133,114 @@
     </div>
 
     {{-- ------------------------------------------------search modal button ------------------------------------------------------- --}}
+
     <section class="p-5">
-        <div class="w-full flex md:justify-between justify-center flex-wrap items-center px-2 gap-5 ">
-            <form action="" method="GET" class=" border-2 p-2 sm:mt-5 rounded-md">
-                <input type="text" name="search" placeholder="Search..."
-                    class="px-2 py-1 rounded-lg border-none bg-gray-200 focus:outline-none text-black">
-                <button type="submit" class="px-3 py-1 bg-blue-900 text-white rounded-lg ml-2">Search</button>
-            </form>
+        <div class="w-full flex md:justify-between justify-center flex-wrap items-center px-2 gap-5">
+            <input type="text" name="search" id="search" placeholder="Search..."
+                class="px-2 py-1 rounded-lg border-none bg-gray-200 focus:outline-none text-black">
             <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                 class="block text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 type="button">
                 Add Article
             </button>
         </div>
-        <h1 class="text-center mb-10 text-2xl text-black font-bold ">Article</h1>
-        <div class="mt-5  flex flex-wrap gap-4">
-
-
-            <a href="
-        {{-- {{route('librarys.show')}} --}}
-        "
+        <div id="articleContainer" class="articlesDisplay mt-5 flex flex-wrap gap-4">
+            <!-- Articles will be displayed here -->
+        </div>
+        <h1 class="text-center mb-10 text-2xl text-black font-bold">Articles</h1>
+        <div class="articlesDisplay mt-5  flex flex-wrap gap-4">
+            @foreach ($articles as $article)
+            <a href="{{ route('article.show', $article) }}"
                 class="max-w-sm mx-auto min-w-[22rem] group bg-slate-200 rounded-lg hover:no-underline focus:no-underline dark:bg-gray-900 ">
-
-                <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500"
-                    src="/storage/hero.jpg">
-
+                @php
+                $imagePath = $article->image ? asset('storage/' . $article->image->path) : asset('storage/empty.jpg');
+                $userName = $article->user ? $article->user->name : 'Unknown';
+                @endphp
+                <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="{{ $imagePath }}">
                 <div class="p-6 space-y-2">
                     <h3 class="text-2xl text-black font-semibold group-hover:underline group-focus:underline">
-                        title</h3>
-
+                        {{ $article->title }}</h3>
                     <span class="text-xs dark:text-gray-400">
-                        {{-- {{ \Carbon\Carbon::parse($event->date)->formatLocalized('%d %B %Y') }} --}}
+                        {{ $article->updated_at->formatLocalized('%d %B %Y') }}
                     </span>
-                    <p> saljfbvaosfb ;sjfbv'jS V'Ofjbvobsfvbsfihbf vHFBV;sbv
-                        {{-- {{ Str::limit($event->description, 90, '...') }} --}}
+                    <p>
+                        {{ Str::limit($article->description, 90, '...') }}
                     </p>
-
                     <div class="flex gap-4">
                         <svg xmlns="" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-                            <path
-                                d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z"
-                                stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path
-                                d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
-                                stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <!-- User icon -->
                         </svg>
                         <span>
-                            {{-- {{ $event->lieu }} --}} writer
+                            {{ $userName }}
                         </span>
                     </div>
-                    <div class="flex gap-4">
-                        <svg xmlns="" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 10H7C9 10 10 9 10 7V5C10 3 9 2 7 2H5C3 2 2 3 2 5V7C2 9 3 10 5 10Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M17 22H19C21 22 22 21 22 19V17C22 15 21 14 19 14H17C15 14 14 15 14 17V19C14 21 15 22 17 22Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z"
-                                stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-
-                        </svg>
-                        <span>
-                            {{-- {{ $event->categories->name }} --}}
-                        </span>
-                    </div>
-
                 </div>
-
-
             </a>
-
+            @endforeach
+        </div>
+        <div class="mt-5">
+            {{ $articles->links() }}
         </div>
     </section>
-</x-client>
+    
+    <script>
+        $(document).ready(function() {
+            $('#search').on('keyup', function() {
+                var query = $(this).val().trim();
+                
+                if (query !== '') {
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('search') }}",
+                        data: {
+                            search: query
+                        },
+                        success: function(response) {
+                             $('#articleContainer').empty(); // Clear previous search results
+    
+                            if (response.original && response.original.length > 0) {
+                                response.original.forEach(function(article) {
+                                    var imagePath = article.image ? '{{ asset('storage/') }}/' + article.image.path : '{{ asset('storage/empty.jpg') }}';
+                                    var userName = article.user ? article.user.name : 'Unknown';
+                                    var articleHtml = `
+                                    <a href="{{ route('article.show', '') }}/${article.id}"
+                                        class="max-w-sm mx-auto min-w-[22rem] group bg-slate-200 rounded-lg hover:no-underline focus:no-underline dark:bg-gray-900 ">
+                                        <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500"
+                                            src="${imagePath}">
+                                        <div class="p-6 space-y-2">
+                                            <h3 class="text-2xl text-black font-semibold group-hover:underline group-focus:underline">
+                                                ${article.title}</h3>
+                                            <span class="text-xs dark:text-gray-400">
+                                                ${article.updated_at}
+                                            </span>
+                                            <p>
+                                                ${article.description.substring(0, 60)}
+                                            </p>
+                                            <div class="flex gap-4">
+                                                <svg xmlns="" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                                                    <!-- User icon -->
+                                                </svg>
+                                                <span>
+                                                    ${userName}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                `;
+                                    $('#articleContainer').append(articleHtml);
+                                });
+                            } else {
+                                $('#articleContainer').html('<p>No articles found.</p>');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#articleContainer').empty(); // Clear the search results or display a message indicating that the search query is empty
+                }
+            });
+        });
+    </script>
+</x-client>    

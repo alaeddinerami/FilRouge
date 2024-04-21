@@ -2,66 +2,78 @@
 
 namespace App\Http\Controllers\client;
 
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Repositories\Interfaces\ArticleInterface;
+use App\Services\Implementations\ArticleService;
+use App\Services\Interfaces\ArticleServiceInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Article $article)
+
+    
+    public function __construct(public ArticleServiceInterface $service)
     {
-        //
-        return view('client.library.index');
+       
+    }
+    public function index()
+    {
+        $articles = $this->service->all();
+
+        return view('client.library.index', compact('articles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(ArticleRequest $request)
     {
-        //
+        $this->service->store($request);
+        return redirect()->back()->with([
+            'message' => 'Article created successfully!',
+            'operationSuccessful' => $this->operationSuccessful = true,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Article $article)
     {
-        //
-        return view('client.library.exploreArticle');
+        $art = $this->service->show($article);
+        // dd($art)
+        return view('client.library.exploreArticle', compact('art'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Article $article)
+
+
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
+        // dd(
+        $this->service->update($request, $article);
+        // );
+        return redirect()->back()->with([
+            'message' => 'Article updated successfully!',
+            'operationSuccessful' => $this->operationSuccessful = true,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Article $article)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Article $article)
     {
-        //
+        $this->service->delete($article);
+
+        return redirect('article')->with([
+            'message' => 'Article deleted successfully!',
+            'operationSuccessful' => true,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'required|string', 
+        ]);
+        $articles = $this->service->search($request);
+        return response()->json($articles);
     }
 }

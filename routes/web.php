@@ -37,8 +37,12 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::resource('/client', ClientController::class);
     Route::get('/profile',[ClientController::class,'showProfileImg'])->name('showProfileImg');
     Route::post('/storeProfileImg',[ClientController::class,'storeProfileImg'])->name('storeProfileImg');
+    Route::post('/addFavorit',[ClientMealController::class,'addFavorit'])->name('addFavorit.store');
+    Route::get('/myfavorites',[ClientMealController::class,'allFavorite'])->name('allFavorite.display');
     Route::resource('/meals', ClientMealController::class);
-    Route::resource('/librarys', clientArticleController::class);
+    Route::get('/search',[clientArticleController::class,'search'])->name('search');
+    
+    Route::resource('/article', clientArticleController::class);
 });
 });
 

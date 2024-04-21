@@ -1,10 +1,10 @@
-<?php
-
-namespace App\Repositories\Interfaces;
+<?php 
+namespace App\Services\Interfaces;
 use App\Http\Requests\RoomRequest;
 use App\Models\Room;
 
-interface RoomInterface{
+interface RoomServiceInterface{
+    
     public function all();
     public function store (RoomRequest $request);
     public function update(RoomRequest $request, Room $room);

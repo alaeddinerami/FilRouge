@@ -20,6 +20,8 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('vite')
@@ -68,8 +70,8 @@
                 <div class="hidden md:block">
                     <ul class="flex items-center space-x-8">
                         <li><a href="#" class="text-white">Home</a></li>
-                        <li><a href="{{ route('librarys.index') }}" class="text-white">Library</a></li>
-                        <li><a href="#" class="text-white">Cafeteria</a></li>
+                        <li><a href="{{ route('article.index') }}" class="text-white">Library</a></li>
+                        <li><a href="{{ route('meals.index')}}" class="text-white">Cafeteria</a></li>
                         <li><a href="#" class="text-white">Accommodation</a></li>
                     </ul>
                 </div>
@@ -92,7 +94,7 @@
                     <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 hidden"
                         id="profileDropdownMenu">
                         <li><a href="{{route('showProfileImg')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
-                        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a></li>
+                        <li><a href="{{route('allFavorite.display')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">My favorites</a></li>
                         <li>
                             <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -116,8 +118,12 @@
                     <li><a href="#" class="block px-4 py-2 text-white bg-gray-900 rounded">Home</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a></li>
-                    <li><a href="{{ route('logout') }}"
-                            class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a></li>
+                    <li>
+                        <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <a href="#" onclick="document.getElementById('logoutForm').submit()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                        </form>
+                    </li>
                 </ul>
             </div>
 
