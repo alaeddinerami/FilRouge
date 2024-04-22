@@ -55,7 +55,9 @@ class MealController extends Controller
     {
         $meal = $this->service->show($meal);
         $meal->load('feedbacks.student.users') ;
-        return view('client.cafeteria.exploreMeal',compact('meal'));
+        $averageStars = $meal->feedbacks->avg('starCount');
+        // dd($averageStars);
+        return view('client.cafeteria.exploreMeal',compact('meal' ,'averageStars'));
 
     }
     public function feedbackStore(FeedbackStoreRequest $request){
