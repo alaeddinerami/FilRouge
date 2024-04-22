@@ -1,6 +1,7 @@
 <?php 
 namespace App\Services\Implementations;
 use App\Http\Requests\FeedbackStoreRequest;
+use App\Models\Feedback;
 use App\Models\Meal;
 use App\Repositories\Interfaces\MealClientInterface;
 use App\Repositories\Interfaces\MealInterface;
@@ -34,6 +35,10 @@ class MealClientService implements MealClientServiceInterface{
     }
     public function feedbackDisplay(){
         return $this->repository->feedbackDisplay();
+
+    }
+    public function feedbackDelete(Feedback $feedback){
+        return $this->repository->feedbackDelete($feedback);
 
     }
 

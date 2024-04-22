@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 use App\Http\Requests\FeedbackStoreRequest;
+use App\Models\Feedback;
 use App\Models\Meal;
 use Illuminate\Http\Request;
 
@@ -13,4 +14,6 @@ interface MealClientInterface{
     public function allFavorite();
     public function feedbackStore(FeedbackStoreRequest $request);
     public function feedbackDisplay();
+    public function feedbackDelete(Feedback $feedback);
+
 }

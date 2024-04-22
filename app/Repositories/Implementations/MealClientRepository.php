@@ -68,5 +68,8 @@ class MealClientRepository implements MealClientInterface
         return Feedback::all();
     }
 
+    public function feedbackDelete(Feedback $feedback){
+        return $feedback->delete();
+    }
 
 }
