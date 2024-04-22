@@ -41,6 +41,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/myfavorites',[ClientMealController::class,'allFavorite'])->name('allFavorite.display');
     Route::post('/feedbackStore',[ClientMealController::class,'feedbackStore'])->name('feedbackStore');
     Route::get('/feedbackDisplay',[ClientMealController::class,'feedbackDisplay'])->name('feedbackDisplay');
+    Route::delete('/feedbackDelete/{feedback}',[ClientMealController::class,'feedbackDelete'])->name('feedbackDelete');
     Route::resource('/meals', ClientMealController::class);
     Route::get('/search',[clientArticleController::class,'search'])->name('search');
     

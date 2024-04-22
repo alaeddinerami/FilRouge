@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FeedbackStoreRequest;
+use App\Models\Feedback;
 use App\Models\Meal;
 use App\Repositories\Implementations\service;
 use App\Repositories\Interfaces\MealClientInterface;
@@ -64,10 +65,9 @@ class MealController extends Controller
             'operationSuccessful' => $this->operationSuccessful = true,
         ]);
     }
-    public function feedbackDisplay(){
-        $feedbacks =  $this ->service->feedbackDisplay();
-        return view('client.cafeteria.exploreMeal',compact('feedbacks'));
+    public function feedbackDelete(Feedback $feedback){
+        $this->service->feedbackDelete($feedback);
+        return redirect()->back();
     }
-
 
 }
