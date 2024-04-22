@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories\Interfaces;
+use App\Http\Requests\FeedbackStoreRequest;
 use App\Models\Meal;
 use Illuminate\Http\Request;
 
@@ -10,4 +11,6 @@ interface MealClientInterface{
     public function orderMeal(Request $request);
     public function addFavorit(Request $request);
     public function allFavorite();
+    public function feedbackStore(FeedbackStoreRequest $request);
+    public function feedbackDisplay();
 }

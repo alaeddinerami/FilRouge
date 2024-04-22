@@ -67,6 +67,7 @@ class ClientController extends Controller
     {
         //
     }
+    
     public function showProfileImg()
     {
         $id = Auth::user()->id;

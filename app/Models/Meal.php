@@ -27,7 +27,7 @@ class Meal extends Model
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
-    }
+    }   
     public function image(): MorphOne
     {
         return $this->morphOne(image::class, 'imageable');

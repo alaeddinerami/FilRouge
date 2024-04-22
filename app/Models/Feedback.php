@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
+    protected $fillable = [
+        
+            'meal_id',
+            'student_id',
+            'starCount',
+            'comment' ,
+        
+    ];
     use HasFactory;
     public function student()
     {

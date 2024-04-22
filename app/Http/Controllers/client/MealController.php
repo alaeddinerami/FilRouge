@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeedbackStoreRequest;
 use App\Models\Meal;
 use App\Repositories\Implementations\service;
 use App\Repositories\Interfaces\MealClientInterface;
@@ -52,7 +53,21 @@ class MealController extends Controller
     public function show(Meal $meal)
     {
         $meal = $this->service->show($meal);
+        $meal->load('feedbacks.student.users') ;
         return view('client.cafeteria.exploreMeal',compact('meal'));
 
     }
+    public function feedbackStore(FeedbackStoreRequest $request){
+        $this->service->feedbackStore($request);
+        return redirect()->back()->with([
+            'message' => 'Your Order passed successfully!',
+            'operationSuccessful' => $this->operationSuccessful = true,
+        ]);
+    }
+    public function feedbackDisplay(){
+        $feedbacks =  $this ->service->feedbackDisplay();
+        return view('client.cafeteria.exploreMeal',compact('feedbacks'));
+    }
+
+
 }

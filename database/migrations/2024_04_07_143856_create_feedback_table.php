@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedBigInteger('meal_id');
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
-            $table->string('star');
+            $table->unsignedBigInteger('starCount');
             $table->string('comment');
             $table->timestamps();
         });

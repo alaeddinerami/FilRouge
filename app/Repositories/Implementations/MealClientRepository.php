@@ -1,8 +1,10 @@
 <?php
 namespace App\Repositories\Implementations;
 
+use App\Http\Requests\FeedbackStoreRequest;
 use App\Models\Commande;
 use App\Models\favorite;
+use App\Models\Feedback;
 use App\Models\Meal;
 use App\Repositories\Interfaces\MealClientInterface;
 use Illuminate\Http\Request;
@@ -55,5 +57,16 @@ class MealClientRepository implements MealClientInterface
     public function allFavorite(){
         return Favorite::paginate(4);
     }
+
+    public function feedbackStore(FeedbackStoreRequest $request){
+        $validate= $request->validated();
+        $validate['student_id'] = auth()->user()->students->id;
+        Feedback::create($validate);   
+
+    }
+    public function feedbackDisplay(){
+        return Feedback::all();
+    }
+
 
 }
