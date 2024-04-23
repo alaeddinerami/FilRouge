@@ -2,14 +2,15 @@
 @php
     use Illuminate\Support\Facades\Auth;
 @endphp
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
+
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Etudient | {{Auth::user()->name }}</title>
+    <title>Etudient | {{ Auth::user()->name }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -22,11 +23,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('vite')
-    @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/StudentProfile.js'])
-    
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/StudentProfile.js'])
+
 
 
 
@@ -55,6 +58,21 @@
         .bg-custom {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/storage/hero.jpg');
         }
+
+        .back {
+            background-color: rebeccapurple;
+            position: relative;
+        }
+
+        .bg-image-opacity::before {
+            content: "";
+            position: absolute;
+            top: 0 ;
+            left:  0 ;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(47, 41, 41, 0.473);
+        }
     </style>
 </head>
 
@@ -71,20 +89,20 @@
                     <ul class="flex items-center space-x-8">
                         <li><a href="#" class="text-white">Home</a></li>
                         <li><a href="{{ route('article.index') }}" class="text-white">Library</a></li>
-                        <li><a href="{{ route('meals.index')}}" class="text-white">Cafeteria</a></li>
-                        <li><a href="#" class="text-white">Accommodation</a></li>
+                        <li><a href="{{ route('meals.index') }}" class="text-white">Cafeteria</a></li>
+                        <li><a href="{{ route('reservation.index') }}" class="text-white">Accommodation</a></li>
                     </ul>
                 </div>
                 <!-- Profile Picture Dropdown -->
                 <div class="relative" id="profileDropdown">
                     <button class="flex items-center focus:outline-none" id="profileDropdownButton">
                         @if (auth::user()->image == null)
-                        <img src="{{ asset('storage/profile.webp') }}"
-                            class="w-10 h-10 rounded-full object-cover mr-4" alt="">
-                            @else
-                        <img src="{{asset('storage/' . auth::user()->image->path)}}" alt="Profile Picture"
-                            class="w-10 h-10 rounded-full object-cover mr-4">
-                            @endif
+                            <img src="{{ asset('storage/profile.webp') }}"
+                                class="w-10 h-10 rounded-full object-cover mr-4" alt="">
+                        @else
+                            <img src="{{ asset('storage/' . auth::user()->image->path) }}" alt="Profile Picture"
+                                class="w-10 h-10 rounded-full object-cover mr-4">
+                        @endif
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white  hidden md:block"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -93,12 +111,15 @@
                     </button>
                     <ul class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 hidden"
                         id="profileDropdownMenu">
-                        <li><a href="{{route('showProfileImg')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
-                        <li><a href="{{route('allFavorite.display')}}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">My favorites</a></li>
+                        <li><a href="{{ route('showProfileImg') }}"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
+                        <li><a href="{{ route('allFavorite.display') }}"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200">My favorites</a></li>
                         <li>
                             <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <a href="#" onclick="document.getElementById('logoutForm').submit()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                                <a href="#" onclick="document.getElementById('logoutForm').submit()"
+                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
                             </form>
                         </li>
                     </ul>
@@ -121,7 +142,8 @@
                     <li>
                         <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <a href="#" onclick="document.getElementById('logoutForm').submit()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                            <a href="#" onclick="document.getElementById('logoutForm').submit()"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
                         </form>
                     </li>
                 </ul>
@@ -225,7 +247,7 @@
 
 
     @stack('scripts')
-   
+
 
 
 </body>

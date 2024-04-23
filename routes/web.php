@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\client\MealController as ClientMealController;
 use App\Http\Controllers\client\ArticleController as clientArticleController;
+use App\Http\Controllers\client\RoomController as clientRoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +45,8 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::delete('/feedbackDelete/{feedback}',[ClientMealController::class,'feedbackDelete'])->name('feedbackDelete');
     Route::resource('/meals', ClientMealController::class);
     Route::get('/search',[clientArticleController::class,'search'])->name('search');
-    
     Route::resource('/article', clientArticleController::class);
+    Route::resource('/reservation',clientRoomController::class);
 });
 });
 
