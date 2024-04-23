@@ -20,7 +20,7 @@
             </div>
             <!-- Item 3 -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="/storage/hero.jpg" 
+                <img src="/storage/hero.jpg"
                     class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                 <div class="absolute inset-0 bg-black opacity-30"></div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="absolute inset-0 bg-black opacity-30"></div>
             </div>
         </div>
-       
+
         <button type="button"
             class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
             data-carousel-prev>
@@ -83,8 +83,8 @@
                         data-modal-toggle="crud-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
@@ -144,51 +144,68 @@
                 Add Article
             </button>
         </div>
-        <div id="articleContainer" class="articlesDisplay mt-5 flex flex-wrap gap-4">
+        <div id="articleContainer" class=" mt-5 flex flex-wrap gap-4">
             <!-- Articles will be displayed here -->
         </div>
-        <h1 class="text-center mb-10 text-2xl text-black font-bold">Articles</h1>
-        <div class="articlesDisplay mt-5  flex flex-wrap gap-4">
-            @foreach ($articles as $article)
-            <a href="{{ route('article.show', $article) }}"
-                class="max-w-sm mx-auto min-w-[22rem] group bg-slate-200 rounded-lg hover:no-underline focus:no-underline dark:bg-gray-900 ">
-                @php
-                $imagePath = $article->image ? asset('storage/' . $article->image->path) : asset('storage/empty.jpg');
-                $userName = $article->user ? $article->user->name : 'Unknown';
-                @endphp
-                <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500" src="{{ $imagePath }}">
-                <div class="p-6 space-y-2">
-                    <h3 class="text-2xl text-black font-semibold group-hover:underline group-focus:underline">
-                        {{ $article->title }}</h3>
-                    <span class="text-xs dark:text-gray-400">
-                        {{ $article->updated_at->formatLocalized('%d %B %Y') }}
-                    </span>
-                    <p>
-                        {{ Str::limit($article->description, 90, '...') }}
-                    </p>
-                    <div class="flex gap-4">
-                        <svg xmlns="" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-                            <!-- User icon -->
-                        </svg>
-                        <span>
-                            {{ $userName }}
-                        </span>
-                    </div>
-                </div>
-            </a>
-            @endforeach
-        </div>
-        <div class="mt-5">
-            {{ $articles->links() }}
+        <div class="articlesDisplay">
+            <h1 class="text-center mb-10 text-2xl text-black font-bold">Articles</h1>
+            <div class=" mt-5  flex flex-wrap gap-4">
+                @foreach ($articles as $article)
+                    <a href="{{ route('article.show', $article) }}"
+                        class="max-w-sm mx-auto min-w-[22rem] group bg-slate-200 rounded-lg hover:no-underline focus:no-underline dark:bg-gray-900 ">
+                        @php
+                            $imagePath = $article->image
+                                ? asset('storage/' . $article->image->path)
+                                : asset('storage/empty.jpg');
+                            $userName = $article->user ? $article->user->name : 'Unknown';
+                        @endphp
+                        <img role="presentation" class="object-cover w-full rounded h-44 dark:bg-gray-500"
+                            src="{{ $imagePath }}">
+                        <div class="p-6 space-y-2">
+                            <h3 class="text-2xl text-black font-semibold group-hover:underline group-focus:underline">
+                                {{ $article->title }}</h3>
+                            <span class="text-xs dark:text-gray-400">
+                                {{ $article->updated_at->formatLocalized('%d %B %Y') }}
+                            </span>
+                            <p>
+                                {{ Str::limit($article->description, 90, '...') }}
+                            </p>
+                            <div class="flex gap-4">
+                                <svg xmlns="" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                                    <!-- User icon -->
+                                </svg>
+                                <span>
+                                    {{ $userName }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+            <div class="mt-5">
+                {{ $articles->links() }}
+            </div>
         </div>
     </section>
-    
+
     <script>
+        var pagehtml = document.querySelector('.articlesDisplay').innerHTML;
+
+
         $(document).ready(function() {
-            $('#search').on('keyup', function() {
+            $('#search').on('input', function() {
+                document.querySelector('.articlesDisplay').innerHTML = "";
+
                 var query = $(this).val().trim();
-                
+
+                if (this.value == '') {
+                    document.querySelector('.articlesDisplay').innerHTML = pagehtml;
+                }
+
                 if (query !== '') {
+
+
+
                     $.ajax({
                         type: "get",
                         url: "{{ route('search') }}",
@@ -196,12 +213,15 @@
                             search: query
                         },
                         success: function(response) {
-                             $('#articleContainer').empty(); // Clear previous search results
-    
+                            $('#articleContainer').empty(); // Clear previous search results
+
                             if (response.original && response.original.length > 0) {
                                 response.original.forEach(function(article) {
-                                    var imagePath = article.image ? '{{ asset('storage/') }}/' + article.image.path : '{{ asset('storage/empty.jpg') }}';
-                                    var userName = article.user ? article.user.name : 'Unknown';
+                                    var imagePath = article.image ?
+                                        '{{ asset('storage/') }}/' + article.image
+                                        .path : '{{ asset('storage/empty.jpg') }}';
+                                    var userName = article.user ? article.user.name :
+                                        'Unknown';
                                     var articleHtml = `
                                     <a href="{{ route('article.show', '') }}/${article.id}"
                                         class="max-w-sm mx-auto min-w-[22rem] group bg-slate-200 rounded-lg hover:no-underline focus:no-underline dark:bg-gray-900 ">
@@ -238,9 +258,10 @@
                         }
                     });
                 } else {
-                    $('#articleContainer').empty(); // Clear the search results or display a message indicating that the search query is empty
+                    $('#articleContainer')
+                .empty(); // Clear the search results or display a message indicating that the search query is empty
                 }
             });
         });
     </script>
-</x-client>    
+</x-client>

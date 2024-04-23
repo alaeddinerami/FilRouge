@@ -6,12 +6,12 @@
         <div class="bg-black bg-opacity-50 h-full flex items-center justify-center">
             <div class="text-center text-white px-8">
                 <h1 class="text-5xl font-bold mb-4">We Have All the Food You Love</h1>
-                <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg">Explore</button>
+                <a href="#goMenu" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg">Explore</a>
             </div>
         </div>
     </div>
 
-    <div class="p-4 min-h-full">
+    <div id="goMenu" class="p-4 min-h-full">
 
         <h1 class="text-3xl font-bold text-center mb-8">Menu</h1>
         <div class="flex-1 mt-10  max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
