@@ -5,6 +5,10 @@ use App\Repositories\Interfaces\RoomClientInterface;
 
 class RoomClientRepository implements RoomClientInterface{
     public function all(){
-        return Room::all();
+        return Room::paginate(3);
     }
+    public function show(Room $room){
+
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
 use App\Services\Interfaces\RoomClientServiceInterface;
 use Illuminate\Http\Request;
 
@@ -39,9 +40,9 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Room $room)
     {
-        //
+     return $this->service->show($room);   
     }
 
     /**

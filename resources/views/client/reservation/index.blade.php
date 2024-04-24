@@ -7,86 +7,30 @@
             </div>
         </div>
     </div>
-    <div class=" flex justify-center md:h-[90vh] bg-white">
-        <div class="transform -translate-y-24 top-0 md:w-[80vw] md:h-[40vh]  ">
-            <div class="flex-1  max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class=" flex justify-center h-[50vh] bg-white">
+        <div class="transform -translate-y-24 top-0 md:w-[80vw] md:h-[40vh] mb-10 ">
+            <div class="flex-1 p-5 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 
-                {{-- @foreach ($favorites as $favorite) --}}
-                @php
-                    // $imagePath = $favorite->meal->image
-                    // ? asset('storage/' . $favorite->meal->image->path)
-                    $imagePath = asset('images/1689786863909.jpg');
+                @foreach ($rooms as $room)
+                    @php
+                        $imagePath = $room->image ? asset('storage/' . $room->image->path) : asset('images/empty.jpg');
 
-                @endphp
-                <a href="" class=" bg-slate-300">
-                    <img class="h-4/6 w-full" src="{{ $imagePath }}" alt="Poulsen Arm Chair">
-                    <div class="p-4">
-                        <h2>fsdbnpfb</h2>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-lg font-bold">5412 $</span>
-
-
+                    @endphp
+                    <a href="" class=" bg-slate-300">
+                        <img class="h-4/6 w-full" src="{{ $imagePath }}" alt="Poulsen Arm Chair">
+                        <div class="p-4 gap-4 text-center">
+                            <h2 class="text-2xl text-center font-bold">Room: {{ $room->roomNumber }}</h2>
+                            <span class="text-lg text-orange-600 text-center font-semibold">{{$room->price}} $</span>
                         </div>
-                    </div>
-                </a>
-                {{-- @endforeach --}}
-                {{-- @foreach ($favorites as $favorite) --}}
-                @php
-                    // $imagePath = $favorite->meal->image
-                    // ? asset('storage/' . $favorite->meal->image->path)
-                    $imagePath = asset('images/1689786863909.jpg');
-
-                @endphp
-                <div class=" bg-slate-300">
-                    <img class="h-4/6 w-full" src="{{ $imagePath }}" alt="Poulsen Arm Chair">
-                    <div class="p-4">
-                        <h2>fsdbnpfb</h2>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-lg font-bold">5412 $</span>
-
-
-                        </div>
-                    </div>
+                    </a>
+                    {{-- @foreach ($favorites as $favorite) --}}
+                    
+                    @endforeach
                 </div>
-                {{-- @endforeach --}}
-                 {{-- @foreach ($favorites as $favorite) --}}
-                 @php
-                 // $imagePath = $favorite->meal->image
-                 // ? asset('storage/' . $favorite->meal->image->path)
-                 $imagePath = asset('images/1689786863909.jpg');
+                <div class=" m-5">
+                    {{ $rooms->links() }}
+                </div>
 
-             @endphp
-             <div class=" bg-slate-300">
-                 <img class="h-4/6 w-full" src="{{ $imagePath }}" alt="Poulsen Arm Chair">
-                 <div class="p-4">
-                     <h2>fsdbnpfb</h2>
-                     <div class="flex items-center justify-between mt-4">
-                         <span class="text-lg font-bold">5412 $</span>
-
-
-                     </div>
-                 </div>
-             </div>
-                 @php
-                 // $imagePath = $favorite->meal->image
-                 // ? asset('storage/' . $favorite->meal->image->path)
-                 $imagePath = asset('images/1689786863909.jpg');
-
-             @endphp
-             <div class=" bg-slate-300">
-                 <img class="h-4/6 w-full" src="{{ $imagePath }}" alt="Poulsen Arm Chair">
-                 <div class="p-4">
-                     <h2>fsdbnpfb</h2>
-                     <div class="flex items-center justify-between mt-4">
-                         <span class="text-lg font-bold">5412 $</span>
-
-
-                     </div>
-                 </div>
-             </div>
-             {{-- @endforeach --}}
-
-            </div>
         </div>
     </div>
 </x-client>
