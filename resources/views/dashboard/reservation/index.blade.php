@@ -55,6 +55,8 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        @foreach ($reservations as $reservation)
+                            
                         <tr
                             class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3">
@@ -67,20 +69,20 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <p class="font-semibold">Hans Burger</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">10x Developer
+                                        <p class="font-semibold">{{$reservation->student->users->name}}</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">{{$reservation->student->users->email}}
                                         </p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 <span class="px-2 py-1 font-semibold leading-tight  rounded-full">
-                                    46 </span>
+                                    {{$reservation->room->roomNumber}} </span>
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 <span
                                     class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved </span>
+                                    {{$reservation->resirvation}} </span>
                             </td>
                             <td class="px-4 py-3 text-sm">15-01-2021</td>
                             <td class=" py-5 flex justify-evenly flex-wrap whitespace-nowrap  text-sm font-medium">
@@ -104,6 +106,7 @@
                         
 
 
+                        @endforeach
                     </tbody>
                 </table>
             </div>

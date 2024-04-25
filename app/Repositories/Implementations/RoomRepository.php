@@ -52,6 +52,7 @@ class RoomRepository implements RoomInterface
 
     public function allReservation(){
         return Reservation::all();
+        
     }
 
 }

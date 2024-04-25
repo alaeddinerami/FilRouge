@@ -62,7 +62,8 @@ class RoomController extends Controller
     }
 
     public function allReservation(){
-        $reservations = $this->service->allReservation();
+        $reservations = $this->service->allReservation()->load('room','student');
+        // dd($reservations);
         return view('dashboard.reservation.index', compact('reservations'));
     }
 

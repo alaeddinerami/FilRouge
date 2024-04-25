@@ -27,6 +27,7 @@ class RoomService implements RoomServiceInterface{
 
     }
     public function allReservation(){
+        
         return $this->repository->allReservation();
     }
 
