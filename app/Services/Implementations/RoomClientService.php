@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Implementations;
 
+use App\Http\Requests\ReservationRequest;
 use App\Models\Room;
 use App\Repositories\Interfaces\RoomClientInterface;
 use App\Services\Interfaces\RoomClientServiceInterface;
@@ -20,5 +21,10 @@ class RoomClientService implements RoomClientServiceInterface
     {
         return $this->repository->show($room);
     }
+
+    public function booking(ReservationRequest $request){
+        return $this->repository->booking($request);
+    }
+
 
 }

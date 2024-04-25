@@ -26,4 +26,8 @@ class RoomService implements RoomServiceInterface{
         return $this->repository->delete($room);
 
     }
+    public function allReservation(){
+        return $this->repository->allReservation();
+    }
+
 }

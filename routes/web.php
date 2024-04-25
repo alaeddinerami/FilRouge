@@ -31,7 +31,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/dashboard', DashboardController::class);
     Route::resource('/meal', MealController::class);
     Route::resource('/room', RoomController::class);
-    Route::get('/roomreservations', [RoomController::class, 'roomResirvation'])->name('room.roomResirvation');
+    Route::get('/allReservation', [RoomController::class, 'allReservation'])->name('allReservation');
 });
 Route::middleware(['auth','userBan'])->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
@@ -45,8 +45,9 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::delete('/feedbackDelete/{feedback}',[ClientMealController::class,'feedbackDelete'])->name('feedbackDelete');
     Route::resource('/meals', ClientMealController::class);
     Route::get('/search',[clientArticleController::class,'search'])->name('search');
+    Route::resource('/rooms',clientRoomController::class);
+    Route::post('/booking',[clientRoomController::class,'booking'])->name('booking');
     Route::resource('/article', clientArticleController::class);
-    Route::resource('/reservation',clientRoomController::class);
 });
 });
 

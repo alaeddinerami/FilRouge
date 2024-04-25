@@ -38,10 +38,11 @@ class MealController extends Controller
 
     public function addFavorit(Request $request){
         $message = $this->service->addFavorit($request);
-        return redirect()->back()->with([
-            'message' => $message,
-            'operationSuccessful' => $this->operationSuccessful = true,
-        ]);
+        return redirect()->back();
+        // return redirect()->back()->with([
+        //     'message' => $message,
+        //     'operationSuccessful' => $this->operationSuccessful = true,
+        // ]);
     }
 
     public function allFavorite(){

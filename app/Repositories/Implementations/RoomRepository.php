@@ -4,6 +4,7 @@ namespace App\Repositories\Implementations;
 
 use App\Http\Requests\ArticleRequest;
 use App\Http\Requests\RoomRequest;
+use App\Models\Reservation;
 use App\Models\Room;
 use App\Repositories\Interfaces\RoomInterface;
 use App\Traits\ImageUpload;
@@ -22,24 +23,35 @@ class RoomRepository implements RoomInterface
         $roomData = $request->all();
         $room = Room::create($roomData);
         if ($request->hasFile('image')) {
+
             $this->storeImg($request->file('image'), $room);
-            return 'Room created successfully!' ;
+
+            return 'Room created successfully!';
         }
 
     }
     public function update(RoomRequest $request, Room $room)
     {
-        $roomData = $request->all(); 
+        // dd($room->image);
+        $roomData = $request->all();
         $room->update($roomData);
-        if ($request->hasFile('image')) {
-            $this->storeImg($request->file('image'), $room);
+        if ($request->hasFile('image') && $room->image) {
+
             $this->updateImg($request->file('image'), $room);
+        } else {
+            $this->storeImg($request->file('image'), $room);
         }
 
     }
+
 
     public function delete(Room $room)
     {
         return $room->delete();
     }
+
+    public function allReservation(){
+        return Reservation::all();
+    }
+
 }

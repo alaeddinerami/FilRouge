@@ -1,5 +1,6 @@
 <?php
 namespace App\Traits;
+use Illuminate\Support\Str;
 
 use App\Models\Image;
 use Illuminate\Support\Facades\Storage;

@@ -223,7 +223,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('room.roomResirvation') }}"
+                            <a href="{{ route('allReservation') }}"
                                 class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                                 <span class="inline-flex justify-center items-center ml-4">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 192 192"

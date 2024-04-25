@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-span-2">
                             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                            <input type="file" name="image" :value="old('image[]')" multiple id="image"
+                            <input type="file" name="image"  multiple id="image"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Actor's full name">
                         </div>
@@ -91,8 +91,7 @@
         </div>
     </div>
     <div class="p-5 flex items-center flex-wrap">
-        <ul class="flex items-center">
-            <li class="inline-flex items-center">
+        <ul class="flex items-center">           <li class="inline-flex items-center">
                 <a href="/dashboard" class="hover:text-blue-500">
                     <svg class="w-5 h-auto fill-current " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         fill="#000000">

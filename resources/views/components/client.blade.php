@@ -90,7 +90,7 @@
                         <li><a href="#" class="text-white">Home</a></li>
                         <li><a href="{{ route('article.index') }}" class="text-white">Library</a></li>
                         <li><a href="{{ route('meals.index') }}" class="text-white">Cafeteria</a></li>
-                        <li><a href="{{ route('reservation.index') }}" class="text-white">Accommodation</a></li>
+                        <li><a href="{{ route('rooms.index') }}" class="text-white">Accommodation</a></li>
                     </ul>
                 </div>
                 <!-- Profile Picture Dropdown -->

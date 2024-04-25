@@ -61,12 +61,9 @@ class RoomController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Room $room)
-    {
-        //
+    public function allReservation(){
+        $reservations = $this->service->allReservation();
+        return view('dashboard.reservation.index', compact('reservations'));
     }
 
     /**
@@ -76,9 +73,6 @@ class RoomController extends Controller
     {
         // dd($roomData);
         $this->service->update($request, $room);
-        if ($request->hasFile('image')) {
-            $this->updateImg($request->file('image'), $room);
-        }
         return redirect()->back()->with([
             'message' => 'room updated successfully!',
             'operationSuccessful' => true,
@@ -101,8 +95,5 @@ class RoomController extends Controller
         ]);
     }
 
-    public function roomResirvation()
-    {
-        return view('dashboard.reservation.index');
-    }
+   
 }
