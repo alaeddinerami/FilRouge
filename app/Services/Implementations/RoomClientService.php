@@ -22,9 +22,9 @@ class RoomClientService implements RoomClientServiceInterface
         return $this->repository->show($room);
     }
 
-    public function allReservation()
+    public function myReservation()
     {
-        return $this->repository->allReservation();
+        return $this->repository->myReservation();
     }
 
     public function booking(ReservationRequest $request)

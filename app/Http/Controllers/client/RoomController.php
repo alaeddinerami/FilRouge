@@ -23,8 +23,8 @@ class RoomController extends Controller
         return view('client.reservation.index', compact('rooms'));
     }
 
-    public function allReservation(){
-        $reservations = $this->service->allReservation();
+    public function myReservation(){
+        $reservations = $this->service->myReservation();
         return view('client.reservation.myReservation',compact('reservations'));
     }
 

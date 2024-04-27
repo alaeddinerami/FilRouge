@@ -1,5 +1,5 @@
 <x-client>
-    <div class="p-5 flex items-center flex-wrap">
+    <div class="p-5 mt-20 flex items-center flex-wrap">
         <ul class="flex items-center">
             <li class="inline-flex items-center">
                 <a href="/dashboard" class="hover:text-blue-500">
@@ -13,7 +13,7 @@
                 <span class="mx-4 h-auto text-gray-400 font-medium">/</span>
             </li>
             <li class="inline-flex items-center">
-                <a href="" class="hover:text-blue-500">Dashboard</a>
+                <a href="" class="hover:text-blue-500">{{Auth::user()->name}}</a>
                 <span class="mx-4 h-auto text-gray-400 font-medium">/</span>
             </li>
             <li class="inline-flex items-center">
@@ -21,7 +21,7 @@
             </li>
         </ul>
     </div>
-    <div class="mt-4 mx-4">
+    <div class="mt-4 h-96 mx-4">
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <div class="flex flex-wrap items-center px-4 py-2">

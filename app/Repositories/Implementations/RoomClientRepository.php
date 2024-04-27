@@ -18,7 +18,7 @@ class RoomClientRepository implements RoomClientInterface
         return $room;
     }
 
-    public function allReservation(){
+    public function myReservation(){
         return Reservation::all();
     }
 

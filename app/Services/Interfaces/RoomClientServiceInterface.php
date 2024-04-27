@@ -8,6 +8,6 @@ interface RoomClientServiceInterface{
     public function all();
     public function show(Room $room);
     public function booking(ReservationRequest $request);
-    public function allReservation();
+    public function myReservation();
 
 }
