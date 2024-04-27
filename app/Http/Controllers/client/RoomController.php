@@ -23,17 +23,11 @@ class RoomController extends Controller
         return view('client.reservation.index', compact('rooms'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function allReservation(){
+        $reservations = $this->service->allReservation();
+        return view('client.reservation.myReservation',compact('reservations'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function booking(ReservationRequest $request)
     {
         // dd('here');

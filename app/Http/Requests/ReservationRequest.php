@@ -23,7 +23,7 @@ class ReservationRequest extends FormRequest
     {
         return [
             'room_id' => 'required|exists:rooms,id',
-            'reserved_at' => 'required|date',
+            'reserved_at' => 'required|date ',
             'finished_at' => 'required|date|after_or_equal:reserved_at',
         ];
     }

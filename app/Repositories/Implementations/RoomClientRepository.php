@@ -15,17 +15,13 @@ class RoomClientRepository implements RoomClientInterface
     }
     public function show(Room $room)
     {
-
-        // $roomFound = Room::with([
-        //     'reservations' => function ($query) {
-        //         $query->orderBy('reservation_finishdate', 'desc')->first();
-        //     }
-        // ])->first();
-
-        // $
-        // dd($room->load('reservations'));
         return $room;
     }
+
+    public function allReservation(){
+        return Reservation::all();
+    }
+
     public function booking(ReservationRequest $request)
     {
         // dd('here');
@@ -57,7 +53,7 @@ class RoomClientRepository implements RoomClientInterface
         $userreservation = $room->reservations()->where('student_id',auth()->user()->students->id)->whereIn('status',['accepted','pending'])->exists();
         if ($userreservation) {
             return [
-                'message' => 'you already reseved!',
+                'message' => 'you already reseved this room!',
                 'operationSuccessful' => $this->operationSuccessful = false,
             ];
         }
@@ -90,5 +86,6 @@ class RoomClientRepository implements RoomClientInterface
             ;
         }
     }
+
 
 }

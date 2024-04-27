@@ -49,6 +49,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/search',[clientArticleController::class,'search'])->name('search');
     Route::resource('/rooms',clientRoomController::class);
     Route::post('/booking',[clientRoomController::class,'booking'])->name('booking');
+    Route::get('/allReservation',[clientRoomController::class,'allReservation'])->name('allReservation');
     Route::resource('/article', clientArticleController::class);
 });
 });
