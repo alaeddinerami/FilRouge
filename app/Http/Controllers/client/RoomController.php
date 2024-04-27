@@ -25,6 +25,7 @@ class RoomController extends Controller
 
     public function myReservation(){
         $reservations = $this->service->myReservation();
+        // dd($reservations);
         return view('client.reservation.myReservation',compact('reservations'));
     }
 
