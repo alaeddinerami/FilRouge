@@ -32,6 +32,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/meal', MealController::class);
     Route::resource('/room', RoomController::class);
     Route::get('/allReservation', [RoomController::class, 'allReservation'])->name('allReservation');
+    Route::patch('/reservationAccepted/{reservation}', [RoomController::class, 'reservationAccepted'])->name('reservationAccepted');
+    Route::PATCH('/rejectReservation/{reservation}', [RoomController::class, 'rejectReservation'])->name('rejectReservation');
 });
 Route::middleware(['auth','userBan'])->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {

@@ -18,8 +18,9 @@ return new class extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
-            $table->enum('resirvation',['pending', 'accepted', 'rejected'])->default('pending');
-            $table->date('reservation_finishdate');
+            $table->enum('status',['pending', 'accepted', 'rejected'])->default('pending');
+            $table->date('reserved_at');
+            $table->date('finished_at');
             $table->timestamps();
         });
     }

@@ -10,16 +10,12 @@
                     <form method="POST" action="{{ route('booking') }}" class="flex flex-col space-y-4">
                         @csrf
                         <input type="hidden" name="room_id" value="{{ $rooms->id }}">
- 
-                
-
-                     
-                        <input id="created_at" type="date" name="created_at" 
-                        min="{{ count($rooms->reservations) && $rooms->reservations[0] && $rooms->reservations[0]->created_at && $rooms->reservations[0]->created_at ? $rooms->reservations[0]->created_at->format('Y-m-d') : now()->format('Y-m-d') }}"
-                        class="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-1/2">
-                        <input id="reservation_finishdate" type="date" name="reservation_finishdate" 
+                        <input id="reserved_at" type="date" name="reserved_at"
+                            {{-- min="{{ count($rooms->reservations) && $rooms->reservations[0] && $rooms->reservations[0]->reserved_at && $rooms->reservations[0]->reserved_at ? $rooms->reservations[0]->reserved_at : now()->format('Y-m-d') }}" --}}
                             class="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-1/2">
-                       
+                        <input id="finished_at" type="date" name="finished_at"
+                            class="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-1/2">
+
                         <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded-md self-start">Book
                             now</button>
                     </form>
@@ -41,7 +37,8 @@
                     </div>
                 </div>
                 <div>
-                    <img src="{{ asset('images/1689786863909.jpg') }}" alt="Hotel Room" class="rounded-lg shadow-md">
+                    <img src="{{ asset('storage/' . $rooms->image->path) }}" alt="Hotel Room"
+                        class="rounded-lg shadow-md">
                     <div class="bg-gray-500 text-white p-4 rounded-lg shadow-md mt-4">
                         <h3 class="font-bold mb-2">Room: {{ $rooms->roomNumber }} </h3>
                         <p class="mb-2">{{ $rooms->description }}</p>
@@ -53,18 +50,14 @@
         </div>
     </section>
 
-    <script>
-     
-      const createdAtInput = document.getElementById('created_at');
-      const finishDateInput = document.getElementById('reservation_finishdate');
-      
-      
-      createdAtInput.addEventListener('change', function() {
-         
-          finishDateInput.min = this.value;
-      });
-  </script>
+    {{-- <script>
+        const createdAtInput = document.getElementById('reserved_at');
+        const finishDateInput = document.getElementById('reservation_finishdate');
+
+
+        createdAtInput.addEventListener('change', function() {
+
+            finishDateInput.min = this.value;
+        });
+    </script> --}}
 </x-client>
-
-
-

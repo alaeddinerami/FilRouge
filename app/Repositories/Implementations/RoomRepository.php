@@ -3,11 +3,13 @@
 namespace App\Repositories\Implementations;
 
 use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\RoomRequest;
 use App\Models\Reservation;
 use App\Models\Room;
 use App\Repositories\Interfaces\RoomInterface;
 use App\Traits\ImageUpload;
+use Illuminate\Http\Request;
 
 class RoomRepository implements RoomInterface
 {
@@ -50,9 +52,26 @@ class RoomRepository implements RoomInterface
         return $room->delete();
     }
 
-    public function allReservation(){
+    public function allReservation()
+    {
         return Reservation::all();
-        
+
     }
+    public function reservationAccepted(Reservation $reservation)
+    {
+        $result = $reservation->status;
+        if ($result == 'pending') {
+            $reservation->update(['status' => 'accepted']);
+        } 
+    }
+    public function rejectReservation(Reservation $reservation)
+    {
+        $result = $reservation->status;
+        // dd($result);
+        if ($result != 'rejected') {
+            $reservation->update(['status' => 'rejected']);
+        } 
+    }
+
 
 }

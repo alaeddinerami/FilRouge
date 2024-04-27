@@ -23,8 +23,8 @@ class ReservationRequest extends FormRequest
     {
         return [
             'room_id' => 'required|exists:rooms,id',
-            'created_at' => 'required|date|after_or_equal:today',
-            'reservation_finishdate' => 'required|date|after_or_equal:created_at',
+            'reserved_at' => 'required|date',
+            'finished_at' => 'required|date|after_or_equal:reserved_at',
         ];
     }
 }

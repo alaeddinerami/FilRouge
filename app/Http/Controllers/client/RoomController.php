@@ -36,11 +36,9 @@ class RoomController extends Controller
      */
     public function booking(ReservationRequest $request)
     {
-        $this->service->booking($request);
-        return redirect()->back()->with([
-            'message' => 'Room reserved successfully!',
-            'operationSuccessful' => $this->operationSuccessful = true,
-        ]);
+        // dd('here');
+        $result = $this->service->booking($request);
+        return redirect()->back()->with($result);
     }
 
     /**
@@ -49,6 +47,7 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         $rooms = $this->service->show($room);
+    //    dd($rooms);
         return view('client.reservation.explore', compact('rooms'));
     }
 

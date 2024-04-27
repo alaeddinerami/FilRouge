@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\RoomRequest;
+use App\Models\Reservation;
 use App\Models\Room;
 use App\Repositories\Interfaces\RoomInterface;
 use App\Services\Interfaces\RoomServiceInterface;
@@ -16,7 +18,7 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-   
+
     public function __construct(public RoomServiceInterface $service)
     {
 
@@ -24,7 +26,7 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = $this->service->all();
-        return view('dashboard.logement.index',compact('rooms'));
+        return view('dashboard.logement.index', compact('rooms'));
 
     }
 
@@ -41,16 +43,16 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request)
     {
-        
+
 
         $room = $this->service->store($request);
-        
-            return redirect()->back()->with([
-                'message' => 'Room created successfully!',
-                'operationSuccessful' => $this->operationSuccessful = true,
-            ]);
-        
-        
+
+        return redirect()->back()->with([
+            'message' => 'Room created successfully!',
+            'operationSuccessful' => $this->operationSuccessful = true,
+        ]);
+
+
     }
 
     /**
@@ -61,12 +63,23 @@ class RoomController extends Controller
         //
     }
 
-    public function allReservation(){
-        $reservations = $this->service->allReservation()->load('room','student');
+    public function allReservation()
+    {
+        $reservations = $this->service->allReservation()->load('room', 'student');
         // dd($reservations);
         return view('dashboard.reservation.index', compact('reservations'));
     }
 
+    public function reservationAccepted(Reservation $reservation)
+    {
+        $this->service->reservationAccepted($reservation);
+        return redirect()->back();
+    }
+    public function rejectReservation(Reservation $reservation)
+    {
+        $this->service->rejectReservation($reservation);
+        return redirect()->back();
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -88,13 +101,13 @@ class RoomController extends Controller
         // $this->deleteImg($room);
 
         // Delete the meal
-         $this->service->delete($room);
-        
+        $this->service->delete($room);
+
         return redirect()->back()->with([
             'message' => 'Meal deleted successfully!',
             'operationSuccessful' => true,
         ]);
     }
 
-   
+
 }
