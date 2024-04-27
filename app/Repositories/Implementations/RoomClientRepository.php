@@ -4,6 +4,7 @@ namespace App\Repositories\Implementations;
 use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
 use App\Models\Room;
+use App\Models\Student;
 use App\Repositories\Interfaces\RoomClientInterface;
 
 class RoomClientRepository implements RoomClientInterface
@@ -33,8 +34,35 @@ class RoomClientRepository implements RoomClientInterface
             "reserved_at" => $validate['reserved_at'],
             "finished_at" => $validate["finished_at"]
         ];
+        $student = Student::where('user_id',auth()->id())->first();
+        // dd($student);
+        $reservationStudent = $student->reservations()
+        ->where('status','accepted')
+            ->where(function ($query) use ($condition) {
+                $query->whereBetween('reserved_at', [$condition["reserved_at"], $condition["finished_at"]])
+                    ->orWhereBetween('finished_at', [$condition["reserved_at"], $condition["finished_at"]])
+                    ->orWhere(function ($query) use ($condition) {
+                        $query->where('reserved_at', '<', $condition["reserved_at"])
+                            ->where('finished_at', '>', $condition["finished_at"]);
+                    });
+            })
+            ->exists();
+            if ($reservationStudent) {
+                return [
+                    'message' => 'you already reseved in another room  !',
+                    'operationSuccessful' => $this->operationSuccessful = false,
+                ];
+            }
         $room = Room::findOrFail($validate['room_id']);
+        $userreservation = $room->reservations()->where('student_id',auth()->user()->students->id)->whereIn('status',['accepted','pending'])->exists();
+        if ($userreservation) {
+            return [
+                'message' => 'you already reseved!',
+                'operationSuccessful' => $this->operationSuccessful = false,
+            ];
+        }
         $reservation = $room->reservations()
+        ->where('status','accepted')
             ->where(function ($query) use ($condition) {
                 $query->whereBetween('reserved_at', [$condition["reserved_at"], $condition["finished_at"]])
                     ->orWhereBetween('finished_at', [$condition["reserved_at"], $condition["finished_at"]])
