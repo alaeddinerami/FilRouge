@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
+use Barryvdh\Debugbar\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
@@ -171,6 +171,9 @@ return [
         //
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ServiceServiceProvider::class,
+        //dompdf
+        // Barryvdh\DomPDF\ServiceProvider::class,
+
     ])->toArray(),
 
     /*
@@ -186,6 +189,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        // 'PDF' => Barryvdh\DomPDF\Facade::class,
+
     ])->toArray(),
 
 ];
