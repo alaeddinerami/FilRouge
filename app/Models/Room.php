@@ -20,6 +20,12 @@ class Room extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function student()
+    {
+        return $this->belongsToMany(Student::class, 'room_student');
+    }
+
     public function image(): MorphOne
     {
         return $this->morphOne(image::class, 'imageable');

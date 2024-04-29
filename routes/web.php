@@ -43,13 +43,15 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::post('/addFavorit',[ClientMealController::class,'addFavorit'])->name('addFavorit.store');
     Route::get('/myfavorites',[ClientMealController::class,'allFavorite'])->name('allFavorite.display');
     Route::post('/feedbackStore',[ClientMealController::class,'feedbackStore'])->name('feedbackStore');
-    Route::get('/feedbackDisplay',[ClientMealController::class,'feedbackDisplay'])->name('feedbackDisplay');
-    Route::delete('/feedbackDelete/{feedback}',[ClientMealController::class,'feedbackDelete'])->name('feedbackDelete');
+    Route::get('/feedbackDisplay/{meal_id}',[ClientMealController::class,'feedbackDisplay'])->name('feedbackDisplay');
+    Route::post('/feedbackDelete/{meal}',[ClientMealController::class,'feedbackDelete'])->name('feedbackDelete');
     Route::resource('/meals', ClientMealController::class);
     Route::get('/search',[clientArticleController::class,'search'])->name('search');
     Route::resource('/rooms',clientRoomController::class);
     Route::post('/booking',[clientRoomController::class,'booking'])->name('booking');
     Route::get('/myReservation',[clientRoomController::class,'myReservation'])->name('myReservation');
+    Route::get('/reservations/{id}/pdf', [clientRoomController::class ,'generatePDF'])->name('generatePDF');
+
     Route::resource('/article', clientArticleController::class);
 });
 });

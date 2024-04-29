@@ -47,6 +47,7 @@ class MealController extends Controller
 
     public function allFavorite(){
         $favorites=  $this ->service->allFavorite();
+        // dd($favorites);
         return view('client.cafeteria.favorite',compact('favorites'));
     }
     /**
@@ -54,22 +55,22 @@ class MealController extends Controller
      */
     public function show(Meal $meal)
     {
-        $meal = $this->service->show($meal);
-        $meal->load('feedbacks.student.users') ;
-        $averageStars = $meal->feedbacks->avg('starCount');
-        // dd($averageStars);
+        $meal->load('feedbackbystudent.users');
+        // dd($meal);
+        $averageStars = $meal->feedbackbystudent->avg('pivot.starCount');        
         return view('client.cafeteria.exploreMeal',compact('meal' ,'averageStars'));
 
     }
     public function feedbackStore(FeedbackStoreRequest $request){
         $this->service->feedbackStore($request);
-        return redirect()->back()->with([
-            'message' => 'Your Order passed successfully!',
-            'operationSuccessful' => $this->operationSuccessful = true,
-        ]);
+        return redirect()->back();
+        // ->with([
+        //     'message' => 'Your Order passed successfully!',
+        //     'operationSuccessful' => $this->operationSuccessful = true,
+        // ]);
     }
-    public function feedbackDelete(Feedback $feedback){
-        $this->service->feedbackDelete($feedback);
+    public function feedbackDelete(Meal $meal){
+        $this->service->feedbackDelete($meal);
         return redirect()->back();
     }
 

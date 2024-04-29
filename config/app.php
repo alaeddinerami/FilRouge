@@ -172,7 +172,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ServiceServiceProvider::class,
         //dompdf
-        // Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ])->toArray(),
 
@@ -189,8 +189,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        // 'PDF' => Barryvdh\DomPDF\Facade::class,
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];

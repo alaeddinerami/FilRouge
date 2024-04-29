@@ -33,12 +33,12 @@ class MealClientService implements MealClientServiceInterface{
     public function feedbackStore(FeedbackStoreRequest $request){
         return $this->repository->feedbackStore($request);
     }
-    public function feedbackDisplay(){
-        return $this->repository->feedbackDisplay();
+    // public function feedbackDisplay($meal_id){
+    //     return $this->repository->feedbackDisplay($meal_id);
 
-    }
-    public function feedbackDelete(Feedback $feedback){
-        return $this->repository->feedbackDelete($feedback);
+    // }
+    public function feedbackDelete(Meal $meal){
+        return $this->repository->feedbackDelete($meal);
 
     }
 

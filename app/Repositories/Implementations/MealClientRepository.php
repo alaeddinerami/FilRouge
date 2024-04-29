@@ -6,6 +6,7 @@ use App\Models\Commande;
 use App\Models\favorite;
 use App\Models\Feedback;
 use App\Models\Meal;
+use App\Models\Student;
 use App\Repositories\Interfaces\MealClientInterface;
 use Illuminate\Http\Request;
 
@@ -25,52 +26,73 @@ class MealClientRepository implements MealClientInterface
             'meal_id' => 'required|exists:meals,id',
         ]);
         $studentId = auth()->user()->students->id;
-
-        $order = Commande::create([
-            'student_id' => $studentId,
-            'meal_id' => $request->meal_id,
-            'status' => 0, 
-        ]);
+        $student = Student::findOrFail($studentId);
+        $meal_Id = $request->meal_id;
+        return $student->commandemeal()->attach($meal_Id);
 
 
     }
-    public function addFavorit(Request $request){
+    public function addFavorit(Request $request)
+    {
         $request->validate([
             'meal_id' => 'required|exists:meals,id',
         ]);
-        
-        $studentId = auth()->user()->students->id;
-        $favourite = Favorite::where('student_id', $studentId)->where('meal_id', $request->meal_id)->first();;
 
-        if($favourite){
-            $favourite->delete();
-            return 'adnijdb';
-        }else{
-            Favorite::create([
-                'student_id' => $studentId,
-                'meal_id' => $request->meal_id,
-                ]);
-                return  'add sucdcsd';
+        $studentId = auth()->user()->students->id;
+
+        $mealId = $request->meal_id;
+        // dd($mealId);
+        $student = Student::findOrFail($studentId);
+        //    dd($student);
+        if (!$student->meal()->where('meal_id', $mealId)->exists()) {
+            return $student->meal()->attach($mealId);
+        } else {
+            return $student->meal()->detach($mealId);
+
         }
     }
 
-    public function allFavorite(){
-        return Favorite::paginate(4);
+    public function allFavorite()
+    {
+        $studentId = auth()->user()->students->id;
+
+        $student = Student::findOrFail($studentId);
+
+        $favorites = $student->meal()->paginate(3);
+        // dd($favorites);
+        return $favorites;
     }
 
-    public function feedbackStore(FeedbackStoreRequest $request){
-        $validate= $request->validated();
-        $validate['student_id'] = auth()->user()->students->id;
-        Feedback::create($validate);   
-
+    public function feedbackStore(FeedbackStoreRequest $request)
+    {
+        $validatedData = $request->validated();
+        $studentId = auth()->user()->students->id;
+        $meal = Meal::findOrFail($validatedData['meal_id']);
+        $meal->feedbackbystudent()->attach($studentId, [
+            'starCount' => $validatedData['starCount'],
+            'comment' => $validatedData['comment'],
+        ]);
     }
-    public function feedbackDisplay(){
-        return Feedback::all();
-    }
+    // public function feedbackDisplay($meal_id)
+    // {
+    //     $studentId = auth()->user()->students->id;
 
-    public function feedbackDelete(Feedback $feedback){
+    //     $student = Student::findOrFail($studentId);
+    //     // Retrieve all feedback for the meal
+    //     $feedback = $student->feedbackMeal()->get();
+    //     dd($feedback);
+
+    //     // Optionally, you can return the feedback data
+    //     return $feedback;
+    // }
+
+    public function feedbackDelete(Meal $meal)
+    {
         // dd($feedback);
-        return $feedback->delete();
+        $studentId = auth()->user()->students->id;
+        $res=$meal->load('feedbackbystudent');
+        // dd($res);
+        $meal->feedbackbystudent()->detach($studentId);
     }
 
 }

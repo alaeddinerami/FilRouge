@@ -13,7 +13,7 @@ interface MealClientInterface{
     public function addFavorit(Request $request);
     public function allFavorite();
     public function feedbackStore(FeedbackStoreRequest $request);
-    public function feedbackDisplay();
-    public function feedbackDelete(Feedback $feedback);
+    // public function feedbackDisplay(Meal $meal);
+    public function feedbackDelete(Meal $meal);
 
 }

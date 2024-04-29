@@ -4,8 +4,10 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationRequest;
+use App\Models\Reservation;
 use App\Models\Room;
 use App\Services\Interfaces\RoomClientServiceInterface;
+use \Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -46,7 +48,15 @@ class RoomController extends Controller
         return view('client.reservation.explore', compact('rooms'));
     }
 
-   
+    public function generatePDF($reservationId)
+    {
+        $reservation = Reservation::findOrFail($reservationId)->load('room');
+        // dd($reservation);
+        $pdf = Pdf::loadView('client.reservation.contract', compact('reservation'));
+        
+        // return view('client.reservation.contract', compact('reservation'));
+        return $pdf->download('reservation.pdf');
+    }
 
     public function update(Request $request, string $id)
     {

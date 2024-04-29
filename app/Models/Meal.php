@@ -16,18 +16,21 @@ class Meal extends Model
         
     ];
 
-    public function commandes()
+    
+    //pivote
+    public function feedbackbystudent()
     {
-        return $this->hasMany(Commande::class);
+        return $this->belongsToMany(Student::class, 'meal_student_feedback')->withPivot('meal_id','student_id','comment','starCount');
     }
-    public function feedbacks()
+    public function commandebystudent()
     {
-        return $this->hasMany(Feedback::class);
+        return $this->belongsToMany(Student::class, 'meal_student_commande');
     }
-    public function favorites()
+      
+    public function student()
     {
-        return $this->hasMany(Favorite::class);
-    }   
+        return $this->belongsToMany(Student::class, 'meal_student')->withPivot('meal_id','student_id');
+    }
     public function image(): MorphOne
     {
         return $this->morphOne(image::class, 'imageable');

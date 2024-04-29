@@ -13,30 +13,37 @@ class Student extends Model
         'user_id',
         'isbanned',
     ];
-    public function commandes()
-    {
-        return $this->hasMany(Commande::class);
-    }
+    
 
     public function reservations()
     {
         return $this->hasMany(Reservation::class);
     }
-    public function feedbacks()
+    
+    public function meal()
     {
-        return $this->hasMany(Feedback::class);
+        return $this->belongsToMany(Meal::class, 'meal_student')->withPivot('meal_id','student_id');
+    }
+    public function feedbackMeal()
+    {
+        return $this->belongsToMany(Meal::class, 'meal_student_feedback');
+    }
+    public function commandemeal()
+    {
+        return $this->belongsToMany(Meal::class, 'meal_student_commande');
+    }
+    public function room()
+    {
+        return $this->belongsToMany(Room::class, 'room_student');
     }
 
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
+    
     public function articles()
     {
         return $this->hasMany(Article::class);
     }
-    public function users(){
+    public function users()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
     public function image(): MorphOne

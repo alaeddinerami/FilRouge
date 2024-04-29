@@ -118,7 +118,7 @@
         </div>
         {{-- /////////////////////////////////////////////// button feedback//////////////////////////////////////////// --}}
         <div class="flex w-full justify-end mt-5 px-6">
-            @if (!$meal->feedbacks()->where('student_id', auth()->user()->students->id)->exists())
+            @if (!$meal->feedbackbystudent()->where('student_id', auth()->user()->students->id)->exists())
                 <button onclick="showreview()"
                     class="rounded-lg bg-orange-500 hover:bg-orange-600 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-orange-500/20 transition-all hover:shadow-lg hover:shadow-orange-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     data-ripple-light="true">
@@ -132,11 +132,11 @@
         </div>
 
         <div class="p-5 h-full rounded-2xl  py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach ($meal->feedbacks as $feedback)
+            @foreach ($meal->feedbackbystudent as $student)
                 <div class="px-10">
                     @php
-                        $imagePath = $feedback->student->users->image
-                            ? asset('storage/' . $feedback->student->users->image->path)
+                        $imagePath = $student->users->image
+                            ? asset('storage/' . $student->users->image->path)
                             : asset('storage/empty.jpg');
 
                     @endphp
@@ -146,11 +146,11 @@
                         <div class="flex justify-between items-center">
                             <div class="mt-4 flex items-center justify-between space-x-4 py-3">
                                 <img class="w-12 h-12 rounded-full" src="{{ $imagePath }}" alt="" />
-                                <div class="text-sm font-semibold">{{ $feedback->student->users->name }}
+                                <div class="text-sm font-semibold">{{ $student->users->name }}
                                 </div>
                             </div>
                             <div class="flex mt-2">
-                                @for ($i = 0; $i < $feedback->starCount; $i++)
+                                @for ($i = 0; $i < $student->pivot->starCount; $i++)
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400"
                                         viewBox="0 0 20 20" fill="currentColor">
                                         <path
@@ -162,12 +162,12 @@
                         <div>
                             <h3 class=" text-base text-gray-600 font-semibold hover:underline cursor-pointer">
                             </h3>
-                            <p class="p-4 text-md text-gray-600">“ {{ $feedback->comment }} ”</p>
+                            <p class="p-4 text-md text-gray-600">“ {{ $student->pivot->comment }} ”</p>
                         </div>
-                        @if (Auth::user()->id == $feedback->student->user_id)
-                            <form action="{{ route('feedbackDelete', $feedback) }}" method="post">
+                        @if (Auth::user()->id == $student->user_id)
+                            <form action="{{ route('feedbackDelete', $meal) }}" method="post">
                                 @csrf
-                                @method('delete')
+                               
                                 <button class="">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class=" absolute bottom-2 right-2  w-7 h-7" viewBox="0 0 24 24"

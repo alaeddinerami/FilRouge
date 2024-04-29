@@ -35,7 +35,7 @@
                                 <form action="{{ route('addFavorit.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="meal_id" value="{{ $meal->id }}">
-                                    @if ($meal->favorites()->where('student_id', auth()->user()->students->id)->exists())
+                                    @if ($meal->student()->where('student_id',auth()->user()->students->id)->exists())
                                         <button type="submit"
                                             class=" absolute top-2 right-0  text-white bg-white hover:bg-yellow-400 focus:outline-none focus:ring-4  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
