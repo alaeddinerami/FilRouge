@@ -12,8 +12,9 @@ interface MealClientServiceInterface{
     public function addFavorit(Request $request);
     public function allFavorite();
     public function feedbackStore(FeedbackStoreRequest $request);
-    // public function feedbackDisplay(Meal $meal);
     public function feedbackDelete(Meal $meal);
+    public function getallorder();
+
 
 
 }

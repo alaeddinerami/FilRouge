@@ -73,5 +73,10 @@ class MealController extends Controller
         $this->service->feedbackDelete($meal);
         return redirect()->back();
     }
+    public function getallorder(){
+       $orders = $this->service->getallorder();
+        return view('client.cafeteria.exploreMeal',compact('orders'));
+
+    }
 
 }

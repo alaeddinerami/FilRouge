@@ -73,18 +73,6 @@ class MealClientRepository implements MealClientInterface
             'comment' => $validatedData['comment'],
         ]);
     }
-    // public function feedbackDisplay($meal_id)
-    // {
-    //     $studentId = auth()->user()->students->id;
-
-    //     $student = Student::findOrFail($studentId);
-    //     // Retrieve all feedback for the meal
-    //     $feedback = $student->feedbackMeal()->get();
-    //     dd($feedback);
-
-    //     // Optionally, you can return the feedback data
-    //     return $feedback;
-    // }
 
     public function feedbackDelete(Meal $meal)
     {
@@ -94,5 +82,9 @@ class MealClientRepository implements MealClientInterface
         // dd($res);
         $meal->feedbackbystudent()->detach($studentId);
     }
+    public function getallorder(){
+        
+    }
+
 
 }

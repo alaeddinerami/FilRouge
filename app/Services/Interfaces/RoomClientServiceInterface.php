@@ -9,5 +9,6 @@ interface RoomClientServiceInterface{
     public function show(Room $room);
     public function booking(ReservationRequest $request);
     public function myReservation();
+    
 
 }

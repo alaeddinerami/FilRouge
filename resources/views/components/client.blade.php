@@ -116,6 +116,9 @@
                         <li><a href="{{ route('allFavorite.display') }}"
                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-200">My favorites</a></li>
                         <li>
+                        <li><a href="{{ route('getallorder') }}"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Orders</a></li>
+                        <li>
                         <li><a href="{{route('myReservation')}}"
                                 class="block px-4 py-2 text-gray-800 hover:bg-gray-200">My Reservations</a></li>
                         <li>
@@ -139,9 +142,9 @@
             </div>
             <div class="mobile-menu hidden md:hidden">
                 <ul class="mt-4 space-y-4">
-                    <li><a href="#" class="block px-4 py-2 text-white bg-gray-900 rounded">Home</a></li>
-                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a></li>
-                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Settings</a></li>
+                    <li><a href="#" class="block px-4 py-2 text-white bg-gray-900 rounded">Profile</a></li>
+                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">My favorites</a></li>
+                    <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">My Reservations</a></li>
                     <li>
                         <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                             @csrf

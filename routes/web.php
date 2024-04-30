@@ -45,6 +45,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::post('/feedbackStore',[ClientMealController::class,'feedbackStore'])->name('feedbackStore');
     Route::get('/feedbackDisplay/{meal_id}',[ClientMealController::class,'feedbackDisplay'])->name('feedbackDisplay');
     Route::post('/feedbackDelete/{meal}',[ClientMealController::class,'feedbackDelete'])->name('feedbackDelete');
+    Route::get('/getallorder',[ClientMealController::class,'getallorder'])->name('getallorder');
     Route::resource('/meals', ClientMealController::class);
     Route::get('/search',[clientArticleController::class,'search'])->name('search');
     Route::resource('/rooms',clientRoomController::class);
