@@ -4,6 +4,7 @@ namespace App\Repositories\Implementations;
 
 use App\Http\Requests\Mealsrequest;
 use App\Models\Meal;
+use App\Models\Student;
 use App\Repositories\Interfaces\MealInterface;
 use App\Traits\ImageUpload;
 
@@ -38,5 +39,13 @@ class MealRepository implements MealInterface
     {
         $this->deleteImg($meal);
         $meal->delete();
+    }
+
+    public function allorders(){
+        $orders = Student::with('commandemeal', 'users', 'users.image')
+        ->has('commandemeal')
+        ->get();
+       return $orders;
+
     }
 }

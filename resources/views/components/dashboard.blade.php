@@ -93,7 +93,7 @@
                             </div>
                         </li>
                         <li>
-                            <a href="{{ route('dashboard.index') }}"
+                            <a href="{{ route('dashboard') }}"
                                 class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-blue-800 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 pr-6">
                                 <span class="inline-flex justify-center items-center ml-4">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -256,27 +256,8 @@
             </main>
         </div>
     </div>
-    {{-- <script>
-        // JavaScript to toggle the dropdown
-        const dropdownButton = document.getElementById('dropdown-button');
-        const dropdownMenu = document.getElementById('dropdown-menu');
-        let isOpen = true; // Set to true to open the dropdown by default
-
-        // Function to toggle the dropdown state
-        function toggleDropdown() {
-            isOpen = !isOpen;
-            dropdownMenu.classList.toggle('hidden', !isOpen);
-        }
-
-        // Set initial state
-        toggleDropdown();
-
-        dropdownButton.addEventListener('click', () => {
-            toggleDropdown();
-        });
-    </script> --}}
+    
     @stack('scripts')
 </body>
 
 </html>
-<!-- component -->

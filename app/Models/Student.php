@@ -30,7 +30,7 @@ class Student extends Model
     }
     public function commandemeal()
     {
-        return $this->belongsToMany(Meal::class, 'meal_student_commande');
+        return $this->belongsToMany(Meal::class, 'meal_student_commande')->withPivot('meal_id','student_id','created_at')->with('image');
     }
     public function room()
     {

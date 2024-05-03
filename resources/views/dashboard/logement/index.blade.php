@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-span-2">
                             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                            <input type="file" name="image"  multiple id="image"
+                            <input type="file" name="image" multiple id="image"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Actor's full name">
                         </div>
@@ -91,7 +91,8 @@
         </div>
     </div>
     <div class="p-5 flex items-center flex-wrap">
-        <ul class="flex items-center">           <li class="inline-flex items-center">
+        <ul class="flex items-center">
+            <li class="inline-flex items-center">
                 <a href="/dashboard" class="hover:text-blue-500">
                     <svg class="w-5 h-auto fill-current " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         fill="#000000">
@@ -131,12 +132,12 @@
                         Edit Room
                     </h3>
                     <button type="button"
-                        class="text-blue-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                        data-modal-toggle="edit-modal">
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        data-modal-target="edit-modal" data-modal-toggle="edit-modal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
@@ -178,7 +179,7 @@
                         </div>
                         <div class="col-span-2">
                             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                            <input type="file" name="image" :value="old('image[]')" multiple id="image"
+                            <input type="file" name="image" :value="old('image')" multiple id="image"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Room's full name">
                         </div>
@@ -191,7 +192,7 @@
                                 d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        <p>Add Room</p>
+                        <p>Save</p>
                     </button>
                 </form>
             </div>
@@ -200,28 +201,27 @@
     {{-- ..........................................display all rooms .............................. --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5">
         @foreach ($rooms as $room)
-        @php
-        $imagePath = $room->image ? asset('storage/' . $room->image->path) : asset('storage/empty.jpg');
-        @endphp    
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img class="w-full h-56 object-cover object-center" src='{{ $imagePath }}' alt="">
-            <div class="p-4">
-                <h2 class="text-xl font-semibold">{{$room->roomNumber}}</h2>
-                <p class="text-gray-600">{{$room->description}}</p>
-                <p class="text-gray-600">{{$room->price}} $</p>
-                <div class="mt-4 flex justify-end gap-5">
-                    <button 
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onclick="openEditModal({{$room->id}},'{{$room->roomNumber}}','{{$room->description}}','{{$room->price}}','{{$room->department}}')">Edit</button>
-                    <form action="{{route('room.destroy',$room)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
-                    </form>
+            @php
+                $imagePath = $room->image ? asset('storage/' . $room->image->path) : asset('storage/empty.jpg');
+            @endphp
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img class="w-full h-56 object-cover object-center" src='{{ $imagePath }}' alt="">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold">{{ $room->roomNumber }}</h2>
+                    <p class="text-gray-600">{{ Str::limit($room->description,45) }}</p>
+                    <p class="text-gray-600">{{ $room->price }} $</p>
+                    <div class="mt-4 flex justify-end gap-5">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            onclick="openEditModal2({{ $room->id }}, {{ $room->roomNumber }}, '{{ $room->description }}', {{ $room->price }}, '{{ $room->department }}' )">Edit</button>
+                        <form action="{{ route('room.destroy', $room) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         @endforeach
     </div>
 

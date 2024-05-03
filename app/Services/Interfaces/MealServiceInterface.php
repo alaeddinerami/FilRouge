@@ -8,4 +8,5 @@ interface   MealServiceInterface{
     public function store(Mealsrequest $request);
     public function update(Mealsrequest $request, Meal $meal);
     public function delete(Meal $meal);
+    public function allorders();
 }

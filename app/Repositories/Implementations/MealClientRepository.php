@@ -83,7 +83,13 @@ class MealClientRepository implements MealClientInterface
         $meal->feedbackbystudent()->detach($studentId);
     }
     public function getallorder(){
-        
+        $studentId = auth()->user()->students->id;
+
+        $student = Student::findOrFail($studentId);
+
+        $orders = $student->commandemeal()->paginate(3);
+        // dd($orders);
+        return $orders;
     }
 
 

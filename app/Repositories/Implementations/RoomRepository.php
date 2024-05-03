@@ -37,11 +37,14 @@ class RoomRepository implements RoomInterface
         // dd($room->image);
         $roomData = $request->all();
         $room->update($roomData);
-        if ($request->hasFile('image') && $room->image) {
-
-            $this->updateImg($request->file('image'), $room);
-        } else {
-            $this->storeImg($request->file('image'), $room);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+    
+            if ($room->image) {
+                $this->updateImg($image, $room);
+            } else {
+                $this->storeImg($image, $room);
+            }
         }
 
     }
@@ -62,7 +65,7 @@ class RoomRepository implements RoomInterface
         $result = $reservation->status;
         if ($result == 'pending') {
             $reservation->update(['status' => 'accepted']);
-        } 
+        }
     }
     public function rejectReservation(Reservation $reservation)
     {
@@ -70,7 +73,7 @@ class RoomRepository implements RoomInterface
         // dd($result);
         if ($result != 'rejected') {
             $reservation->update(['status' => 'rejected']);
-        } 
+        }
     }
 
 

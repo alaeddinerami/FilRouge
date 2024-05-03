@@ -29,4 +29,9 @@ class MealService implements MealServiceInterface
     {
         return $this->repository->delete($meal);
     }
+    public function allorders(){
+        return $this->repository->allorders();
+
+    }
+
 }

@@ -28,8 +28,8 @@ use App\Http\Controllers\client\RoomController as clientRoomController;
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/student',StudentController::class)->only('index');
     Route::patch('/users/{user}', [StudentController::class, 'StudentBan'])->name('Student.StudentBan');
-    Route::resource('/dashboard', DashboardController::class);
     Route::resource('/meal', MealController::class);
+    Route::get('/dashboard',[MealController::class,'allorders'])->name('dashboard');
     Route::resource('/room', RoomController::class);
     Route::get('/allReservation', [RoomController::class, 'allReservation'])->name('allReservation');
     Route::patch('/reservationAccepted/{reservation}', [RoomController::class, 'reservationAccepted'])->name('reservationAccepted');

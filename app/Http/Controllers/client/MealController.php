@@ -75,7 +75,7 @@ class MealController extends Controller
     }
     public function getallorder(){
        $orders = $this->service->getallorder();
-        return view('client.cafeteria.exploreMeal',compact('orders'));
+        return view('client.cafeteria.order',compact('orders'));
 
     }
 

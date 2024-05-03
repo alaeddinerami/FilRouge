@@ -38,9 +38,9 @@
                    
                     <div class="text-left  md:ml-5">
                         
-                        <h2 class=" flex flex-row  text-3xl font-extrabold mt-3 mb-3 md:mb-6">
+                        <h2 class=" flex flex-row  text-xl font-extrabold mt-3 mb-3 md:mb-6">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                class="w-8 h-8 md:h-12 md:w-12 md:mx-5" version="1.1" id="_x32_" viewBox="0 0 512 512"
+                                class="w-8 h-8 md:h-8 md:w-8 md:mr-2" version="1.1" id="_x32_" viewBox="0 0 512 512"
                                 xml:space="preserve">
                                 <style type="text/css">
                                     .st0 {
@@ -89,7 +89,7 @@
                         </p>
 
 
-                        <div class=" md:absolute top-0 right-2 flex items-center space-x-1 pl-5 pt-5">
+                        <div class=" md:absolute top-0 right-0 flex items-center space-x-1 pl-5 pt-5">
                             @for ($i = 1; $i <= 5; $i++)
                                 @if ($i <= $averageStars)
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400"

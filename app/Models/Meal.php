@@ -24,7 +24,7 @@ class Meal extends Model
     }
     public function commandebystudent()
     {
-        return $this->belongsToMany(Student::class, 'meal_student_commande');
+        return $this->belongsToMany(Student::class, 'meal_student_commande')->withPivot('meal_id','student_id');
     }
       
     public function student()

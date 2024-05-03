@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Mealsrequest;
 use App\Models\Meal;
+use App\Models\Student;
 use App\Repositories\Interfaces\MealInterface;
 use App\Services\Interfaces\MealServiceInterface;
 use App\Traits\ImageUpload;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class MealController extends Controller
 {
@@ -17,7 +19,6 @@ class MealController extends Controller
 
     public function __construct(public MealServiceInterface $service)
     {
-
     }
     public function index()
     {
@@ -26,18 +27,12 @@ class MealController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function allorders()
     {
-        //
-
+        $orders = $this->service->allorders();
+        
+        return view('dashboard.index', compact('orders'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Mealsrequest $request)
     {
 
@@ -49,29 +44,8 @@ class MealController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Meal $meal)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Meal $meal)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Mealsrequest $request, Meal $meal)
     {
-
-
         $this->service->update($request, $meal);
 
         return redirect()->back()->with([

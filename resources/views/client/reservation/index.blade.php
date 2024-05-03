@@ -11,13 +11,13 @@
     </div>
     <div class=" flex justify-center h-[50vh] bg-white">
         <div class="transform -translate-y-24 top-0 md:w-[80vw] md:h-[40vh] ">
-            <div class="flex-1 h-[50vh] p-5 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="flex-1  p-5 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 @foreach ($rooms as $room)
                     @php
                         $imagePath = $room->image ? asset('storage/' . $room->image->path) : asset('images/empty.jpg');
                     @endphp
-                    <a href="{{ route('rooms.show', $room) }}" class=" h-4/6 bg-slate-300">
+                    <a href="{{ route('rooms.show', $room) }}" class="  bg-slate-300">
                         <img class="h-4/6 w-full" src="{{ $imagePath }}" alt="Poulsen Arm Chair">
                         <div class="p-4 gap-4 text-center">
                             <h2 class="text-2xl text-center font-bold">Room: {{ $room->roomNumber }}</h2>
