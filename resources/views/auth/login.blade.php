@@ -17,11 +17,6 @@
             in</button>
     </form>
 
-    <div class="text-grey-dark mt-3">
-        <a href="{{ route('passwordrest.index') }}" class="hover:text-blue-900 hover:underline">Forgot your
-            password?</a>
-    </div>
-
     <div class="text-center text-grey-dark mt-3">
         Don't have an account?
         <a href="{{ route('register.index') }}"

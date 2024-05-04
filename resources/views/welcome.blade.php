@@ -13,13 +13,14 @@
     <style>
         .bg-custom {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/storage/hero.jpg');
+            height: 80vh
         }
     </style>
 </head>
 
-<body class=" bg-gray-100 h-screen ">
+<body class=" bg-gray-100 h-screen  ">
 
-    <header class="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-70 z-50">
+    <header class="fixed  w-full bg-gray-800 bg-opacity-70 z-50">
         <nav class="container mx-auto px-6 ">
             <div class="flex items-center justify-between">
                 <div class="text-white font-bold text-xl">
@@ -30,7 +31,7 @@
                 <div class="hidden md:block">
                     <ul class="flex items-center space-x-8">
                         @auth
-                            <li><a href="#" class="text-white">Home</a></li>
+                            <li><a href="{{route('client.index')}}" class="text-white">Home</a></li>
                         @else
                             <li><a href=" {{ route('login.index') }} "
                                     class="font-semibold text-gray-200 hover:text-gray-900 border p-2 border-white dark:text-gray-200 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
@@ -52,7 +53,7 @@
             </div>
             <div class="mobile-menu hidden md:hidden">
                 <ul class="mt-4 space-y-4">
-                    <li><a href="#" class="block px-4 py-2 text-white bg-gray-900 rounded">Home</a></li>
+                    <li><a href="" class="block px-4 py-2 text-white bg-gray-900 rounded">Home</a></li>
                     <li><a href="
                         {{ route('login.index') }}
                         "
@@ -67,7 +68,7 @@
 
         </nav>
     </header>
-    <div class=" h-3/5 bg-cover bg-custom bg-center bg-no-repeat">
+    <div class=" w-full bg-cover bg-custom bg-center bg-no-repeat">
         <div class="flex justify-center  items-center h-full">
             <div class="col-span-6 text-white text-center">
                 <h1 class="font-extrabold text-3xl md:text-5xl mb-8">Discover Your New Home</h1>
@@ -78,8 +79,8 @@
         </div>
     </div>
 
-    <main class="m-10  ">
-        <section class=" ">
+    
+        <section class="">
 
             <div class=" w-full bg-gray-200 p-8 rounded-lg flex flex-col md:flex-row items-center gap-4">
                 <img class="w-full md:w-1/2  rounded-lg " src="/storage/hero.jpg" alt="">
@@ -207,11 +208,9 @@
                             sapien sed semper.</p>
                     </div>
                 </div>
-                <!-- Additional FAQs... -->
             </div>
         </section>
 
-    </main>
 
     
     <footer class="flex flex-col   bg-gray-400 ">

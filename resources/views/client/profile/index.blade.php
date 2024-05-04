@@ -16,9 +16,8 @@
             <form action="{{ route('storeProfileImg') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex justify-between">
-                    <span class="text-xl font-semibold block">Admin Profile</span>
+                    <span class="text-2xl font-semibold block">Profile</span>
                 </div>
-                <span class="text-gray-600">This information is secret so be careful</span>
                 <div class="w-full p-8 mx-2 flex justify-center">
                     @if ($profileData->image == null)
                         <img src="{{ asset('storage/profile.webp') }}"

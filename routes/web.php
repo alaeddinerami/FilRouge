@@ -2,11 +2,8 @@
 
 use App\Http\Controllers\admin\StatisticsController;
 use App\Http\Controllers\auth\LoginController;
-use App\Http\Controllers\auth\LogoutController;
-use App\Http\Controllers\auth\PasswordController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\client\ClientController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MealController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\StudentController;
@@ -66,7 +63,6 @@ Route::middleware(['guest'])->group(function () {
 Route::resource('/register', RegisterController::class);
 Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::resource('/login', LoginController::class);
-Route::resource('/passwordrest', PasswordController::class);
 });
 
 Route::get('/', function () {

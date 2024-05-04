@@ -34,45 +34,13 @@
 
 
     <style>
-        /* Custom style */
-        .header-right {
-            width: calc(100% - 3.5rem);
-        }
-
-        .sidebar:hover {
-            width: 16rem;
-        }
-
-
-
-        main {
-            height: auto;
-        }
-
-        @media only screen and (min-width: 768px) {
-            .header-right {
-                width: calc(100% - 16rem);
-            }
-        }
+        
 
         .bg-custom {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/storage/hero.jpg');
         }
 
-        .back {
-            background-color: rebeccapurple;
-            position: relative;
-        }
-
-        .bg-image-opacity::before {
-            content: "";
-            position: absolute;
-            top: 0 ;
-            left:  0 ;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(47, 41, 41, 0.473);
-        }
+     
     </style>
 </head>
 
@@ -87,7 +55,7 @@
                 </div>
                 <div class="hidden md:block">
                     <ul class="flex items-center space-x-8">
-                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="{{route('client.index')}}" class="text-white">Home</a></li>
                         <li><a href="{{ route('article.index') }}" class="text-white">Library</a></li>
                         <li><a href="{{ route('meals.index') }}" class="text-white">Cafeteria</a></li>
                         <li><a href="{{ route('rooms.index') }}" class="text-white">Accommodation</a></li>

@@ -28,7 +28,6 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($validation)) {
-            // Authentication successful
             $user = Auth::user();
             
             // dd($user->students->isbanned);
@@ -36,7 +35,7 @@ class LoginController extends Controller
                 return redirect()->intended('/dashboard');
             }
             if ($user->role == 'student' ) {
-                return redirect('/article');
+                return redirect('/client');
             } else {
                 Auth::logout();              
                 return redirect('/login')->with('error', 'Your account is banned');
@@ -44,8 +43,6 @@ class LoginController extends Controller
 
         }
 
-
-        // Authentication failed
         return back()->withErrors([
             'email' => 'The provided information do not match our records.',
         ]);
