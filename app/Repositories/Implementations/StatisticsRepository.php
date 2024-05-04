@@ -26,7 +26,7 @@ class StatisticsRepository implements StatisticsInterface
         $orders = Student::with('commandemeal', 'users', 'users.image')
             ->has('commandemeal')
             ->withCount('commandemeal')
-            ->paginate(1);
+            ->get();
             // dd($orders);
         return view('dashboard.index', compact('studentsCount', 'ordersCount', 'reservationCount', 'orders'));
 

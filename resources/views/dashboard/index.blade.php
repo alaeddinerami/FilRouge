@@ -293,7 +293,6 @@
                         @endforeach
                     </table>
                 </div>
-                {{ $orders->links() }}
             </div>
         </div>
 

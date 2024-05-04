@@ -48,11 +48,5 @@ class MealRepository implements MealInterface
         $meal->delete();
     }
 
-    public function allorders(){
-    //     $orders = Student::with('commandemeal', 'users', 'users.image')
-    //     ->has('commandemeal')
-    //     ->get();
-    //    return $orders;
-
-    }
+    
 }
