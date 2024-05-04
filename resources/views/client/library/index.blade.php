@@ -157,7 +157,7 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 placeholder="Description"></textarea>
                         </div>
-                        <input type="hidden" name='user_id'value='{{ Auth::user()->id }}'>
+                        <input type="hidden" name='student_id'value='{{ Auth::user()->students->id }}'>
 
                         <div class="col-span-2">
                             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
@@ -224,7 +224,7 @@
                                     <!-- User icon -->
                                 </svg>
                                 <span>
-                                    {{ $userName }}
+                                    {{ $article->student->users->name }}
                                 </span>
                             </div>
                         </div>

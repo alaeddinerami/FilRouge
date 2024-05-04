@@ -21,10 +21,10 @@ class RoomClientRepository implements RoomClientInterface
     public function myReservation()
     {
         $student = Student::where('user_id', auth()->id())->first();
-        
+
         $reservation = $student->reservations()->paginate(4);
         // dd($reservation);
-        return $reservation ;
+        return $reservation;
     }
 
     public function booking(ReservationRequest $request)
@@ -50,15 +50,24 @@ class RoomClientRepository implements RoomClientInterface
             ->exists();
         if ($reservationStudent) {
             return [
-                'message' => 'you already reseved in another room  !',
+                'message' => 'You have already reserved another room during this time',
                 'operationSuccessful' => $this->operationSuccessful = false,
             ];
         }
         $room = Room::findOrFail($validate['room_id']);
-        $userreservation = $room->reservations()->where('student_id', auth()->user()->students->id)->whereIn('status', ['accepted', 'pending'])->exists();
+        $userreservation = $room->reservations()
+
+        ->where('student_id', auth()->user()->students->id)->whereIn('status', ['accepted', 'pending'])->where(function ($query) use ($condition) {
+            $query->whereBetween('reserved_at', [$condition["reserved_at"], $condition["finished_at"]])
+                ->orWhereBetween('finished_at', [$condition["reserved_at"], $condition["finished_at"]])
+                ->orWhere(function ($query) use ($condition) {
+                    $query->where('reserved_at', '<', $condition["reserved_at"])
+                        ->where('finished_at', '>', $condition["finished_at"]);
+                });
+        })->exists();
         if ($userreservation) {
             return [
-                'message' => 'you already reseved this room!',
+                'message' => 'You have already reserved this room during this time',
                 'operationSuccessful' => $this->operationSuccessful = false,
             ];
         }
@@ -76,7 +85,7 @@ class RoomClientRepository implements RoomClientInterface
         // dump($reservation);
         if ($reservation) {
             return [
-                'message' => 'this date is aready reseved!',
+                'message' => 'This date is already reserved',
                 'operationSuccessful' => $this->operationSuccessful = false,
             ];
         } else {
@@ -91,7 +100,7 @@ class RoomClientRepository implements RoomClientInterface
             ;
         }
     }
-  
+
 
 
 }

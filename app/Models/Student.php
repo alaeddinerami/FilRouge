@@ -37,11 +37,11 @@ class Student extends Model
         return $this->belongsToMany(Room::class, 'room_student');
     }
 
-    
     public function articles()
     {
         return $this->hasMany(Article::class);
     }
+   
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id');

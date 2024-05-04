@@ -55,13 +55,7 @@ class RoomController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Room $room)
-    {
-        //
-    }
+    
 
     public function allReservation()
     {

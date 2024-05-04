@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\StatisticsController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\PasswordController;
@@ -26,10 +27,10 @@ use App\Http\Controllers\client\RoomController as clientRoomController;
 |
 */
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard',[StatisticsController::class,'allorders'])->name('dashboard');
     Route::resource('/student',StudentController::class)->only('index');
     Route::patch('/users/{user}', [StudentController::class, 'StudentBan'])->name('Student.StudentBan');
     Route::resource('/meal', MealController::class);
-    Route::get('/dashboard',[MealController::class,'allorders'])->name('dashboard');
     Route::resource('/room', RoomController::class);
     Route::get('/allReservation', [RoomController::class, 'allReservation'])->name('allReservation');
     Route::patch('/reservationAccepted/{reservation}', [RoomController::class, 'reservationAccepted'])->name('reservationAccepted');

@@ -234,7 +234,7 @@
                             </td>
                             <td class="flex justify-center ml-5 py-5">
                                 <button
-                                    onclick="openEditModal({{ $meal->id + 1}},'{{ $meal->name }}','{{ $meal->description }}','{{ $meal->price }}')"
+                                    onclick="openEditModal({{ $meal->id}},'{{ $meal->name }}','{{ $meal->description }}','{{ $meal->price }}')"
                                     class="mr-6" title="Edit">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">

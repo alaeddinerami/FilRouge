@@ -22,7 +22,7 @@ class ArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'=>'sometimes',
+            'student_id'=>'sometimes',
             'title' => 'sometimes|string|max:255',
             'description' => 'sometimes|string',
         ];

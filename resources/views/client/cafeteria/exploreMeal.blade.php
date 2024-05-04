@@ -2,9 +2,13 @@
     <section class="bg-gray-100">
 
         <x-sweetalert></x-sweetalert>
+        @php
+            $imagePath = $meal->image ? asset('storage/' . $meal->image->path) : asset('storage/empty.jpg');
+
+        @endphp
         <!-- Hero Section -->
         <div class="bg-cover bg-center h-screen"
-            style="background-image: url({{ asset('storage/' . $meal->image->path) }})">
+            style="background-image: url({{ $imagePath }})">
             <div class="bg-black bg-opacity-60 h-full flex flex-wrap items-center  justify-around ">
                 <div class="text-center text-white px-8">
                     <span class="text-xl font-light mb-4">ENJOY YOUR HEALTHY DELICIOUS MEAL </span>
@@ -15,33 +19,28 @@
                     </p>
 
                 </div>
-                <img class=" w-2/5 h-80 rounded-lg" src="{{ asset('storage/' . $meal->image->path) }}" alt="">
+
+                <img class=" w-2/5 h-80 rounded-lg" src="{{ $imagePath }}" alt="">
             </div>
         </div>
         </div>
 
         <div class="flex flex-wrap justify-center">
             <div class="font-[sans-serif] text-gray-800 bg-gray-200 min-w-36 md:w-3/6    rounded-2xl m-5 px-5 py-5">
-                
+
                 <div class="flex justify-center  md:flex md:justify-start flex-wrap relative ">
-                    @if ($meal->image)
                         <div class="flex justify-center items-center">
-                            <img src="{{ asset('storage/' . $meal->image->path) }}" alt="Placeholder Image"
+                            <img src="{{ $imagePath}}" alt="Placeholder Image"
                                 class="rounded-lg object-cover w-64 h-58" />
                         </div>
-                    @else
-                        <div class="flex justify-center items-center">
-                            <img src="{{ asset('storage/empty.jpg') }}" alt="Placeholder Image"
-                                class="rounded-lg object-cover w-64 h-58" />
-                        </div>
-                    @endif
-                   
+                    
+
                     <div class="text-left  md:ml-5">
-                        
+
                         <h2 class=" flex flex-row  text-xl font-extrabold mt-3 mb-3 md:mb-6">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                class="w-8 h-8 md:h-8 md:w-8 md:mr-2" version="1.1" id="_x32_" viewBox="0 0 512 512"
-                                xml:space="preserve">
+                                class="w-8 h-8 md:h-8 md:w-8 md:mr-2" version="1.1" id="_x32_"
+                                viewBox="0 0 512 512" xml:space="preserve">
                                 <style type="text/css">
                                     .st0 {
                                         fill: #000000;
@@ -81,11 +80,17 @@
                         </p>
                         <p class=" flex flex-row mb-4 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none">
-                                <path d="M8.67188 14.3298C8.67188 15.6198 9.66188 16.6598 10.8919 16.6598H13.4019C14.4719 16.6598 15.3419 15.7498 15.3419 14.6298C15.3419 13.4098 14.8119 12.9798 14.0219 12.6998L9.99187 11.2998C9.20187 11.0198 8.67188 10.5898 8.67188 9.36984C8.67188 8.24984 9.54187 7.33984 10.6119 7.33984H13.1219C14.3519 7.33984 15.3419 8.37984 15.3419 9.66984" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 6V18" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H15C20 2 22 4 22 9V15C22 20 20 22 15 22Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            <span class="py-2 px-3" >{{ $meal->price }} $</span>
+                                <path
+                                    d="M8.67188 14.3298C8.67188 15.6198 9.66188 16.6598 10.8919 16.6598H13.4019C14.4719 16.6598 15.3419 15.7498 15.3419 14.6298C15.3419 13.4098 14.8119 12.9798 14.0219 12.6998L9.99187 11.2998C9.20187 11.0198 8.67188 10.5898 8.67188 9.36984C8.67188 8.24984 9.54187 7.33984 10.6119 7.33984H13.1219C14.3519 7.33984 15.3419 8.37984 15.3419 9.66984"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 6V18" stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H15C20 2 22 4 22 9V15C22 20 20 22 15 22Z"
+                                    stroke="#292D32" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span class="py-2 px-3">{{ $meal->price }} $</span>
                         </p>
 
 
@@ -109,12 +114,12 @@
                             @endfor
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
 
             </div>
-            
+
         </div>
         {{-- /////////////////////////////////////////////// button feedback//////////////////////////////////////////// --}}
         <div class="flex w-full justify-end mt-5 px-6">
@@ -167,7 +172,7 @@
                         @if (Auth::user()->id == $student->user_id)
                             <form action="{{ route('feedbackDelete', $meal) }}" method="post">
                                 @csrf
-                               
+
                                 <button class="">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                         class=" absolute bottom-2 right-2  w-7 h-7" viewBox="0 0 24 24"

@@ -10,7 +10,7 @@
                     <form method="POST" action="{{ route('booking') }}" class="flex flex-col space-y-4">
                         @csrf
                         <input type="hidden" name="room_id" value="{{ $rooms->id }}">
-                        <input id="reserved_at" type="date" name="reserved_at" {{-- min="{{ count($rooms->reservations) && $rooms->reservations[0] && $rooms->reservations[0]->reserved_at && $rooms->reservations[0]->reserved_at ? $rooms->reservations[0]->reserved_at : now()->format('Y-m-d') }}" --}}
+                        <input id="reserved_at" type="date" name="reserved_at" min="{{ now()->format('Y-m-d') }}"
                             class="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-1/2">
                         <input id="finished_at" type="date" name="finished_at"
                             class="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-1/2">

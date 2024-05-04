@@ -30,9 +30,16 @@ class MealRepository implements MealInterface
         $mealData = $request->all();
         $meal->update($mealData);
         if ($request->hasFile('image')) {
-            $this->storeImg($request->file('image'), $meal);
-            $this->updateImg($request->file('image'), $meal);
+            $image = $request->file('image');
+            
+            if ($meal->image) {
+                $this->updateImg($image, $meal);
+            } else {
+                $this->storeImg($image, $meal);
+            }
+        
         }
+       
     }
 
     public function delete(Meal $meal)
@@ -42,10 +49,10 @@ class MealRepository implements MealInterface
     }
 
     public function allorders(){
-        $orders = Student::with('commandemeal', 'users', 'users.image')
-        ->has('commandemeal')
-        ->get();
-       return $orders;
+    //     $orders = Student::with('commandemeal', 'users', 'users.image')
+    //     ->has('commandemeal')
+    //     ->get();
+    //    return $orders;
 
     }
 }

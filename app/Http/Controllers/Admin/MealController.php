@@ -27,12 +27,12 @@ class MealController extends Controller
 
     }
 
-    public function allorders()
-    {
-        $orders = $this->service->allorders();
+    // public function allorders()
+    // {
+    //     $orders = $this->service->allorders();
         
-        return view('dashboard.index', compact('orders'));
-    }
+    //     return view('dashboard.index', compact('orders'));
+    // }
     public function store(Mealsrequest $request)
     {
 

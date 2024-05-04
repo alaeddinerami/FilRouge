@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Services\Interfaces\StatisticsServiceInterface;
 use Illuminate\Http\Request;
 
-class Statistics extends Controller
+class StatisticsController extends Controller
 {
     public function __construct(public StatisticsServiceInterface $service){
     }
-    public function index(){
-        return view('dashboard.index');
+  
+    public function allorders(){
+        return $this->service->allorders();
+        
     }
 
 }

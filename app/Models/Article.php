@@ -10,11 +10,11 @@ class Article extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['user_id', 'title', 'description'];
+    protected $fillable = ['student_id', 'title', 'description'];
 
-    public function user()
+    public function student()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Student::class);
     }
     public function image(): MorphOne
     {

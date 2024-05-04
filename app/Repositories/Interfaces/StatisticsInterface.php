@@ -5,4 +5,5 @@ interface   StatisticsInterface{
     public function usersCount();
     public function ordersCount();
     public function reservationCount();
+    public function allorders();
 }

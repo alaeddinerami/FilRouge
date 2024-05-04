@@ -46,10 +46,10 @@
                 <table class="w-full">
                     <thead>
                         <tr
-                            class="text-xs font-semibold tracking-wide  text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            class="text-xs font-semibold tracking-wide  text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 ">
                             <th class="px-4 py-3 text-left">Client</th>
                             <th class="px-4 py-3 text-left">Room</th>
-                            <th class="px-4 py-3 text-left">Reservation</th>
+                            <th class="px-6 py-3 text-left">Status</th>
                             <th class="px-4 py-3 text-left">Start Date</th>
                             <th class="px-4 py-3 text-left">Finish Date</th>
                             <th class="px-4 py-3  text-center">Action</th>
@@ -59,7 +59,7 @@
                         @foreach ($reservations as $reservation)
                             
                         <tr
-                            class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                            class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 ">
                             <td class="px-4 py-3">
                                 <div class="flex items-center text-sm">
                                     <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -88,7 +88,7 @@
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                    class="px-2 py-1 font-semibold leading-tight  ">
                                     {{$reservation->status}} </span>
                             </td>
                             <td class="px-4 py-3 text-sm">{{$reservation->reserved_at}}</td>

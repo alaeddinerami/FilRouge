@@ -48,7 +48,7 @@ class ArticleRepository implements ArticleInterface
 
     {
         $query = $request->input('search');
-        $articles = Article::with('image','user')->where('title', 'like', '%'.$query.'%')->get();
+        $articles = Article::with('image','student')->where('title', 'like', '%'.$query.'%')->get();
         // dd($articles);
         return response()->json($articles);
     }
