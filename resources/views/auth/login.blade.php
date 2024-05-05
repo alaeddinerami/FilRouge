@@ -22,37 +22,13 @@
         <a href="{{ route('register.index') }}"
             class="hover:underline border-b border-blue text-blue hover:text-blue-900">Sign up</a>.
     </div>
-    {{-- <script>
-        function validateForm() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            // Regex patterns
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const passwordPattern = /^(?=.*[a-z]).{8,}$/;
-
-            // Check email
-            if (!emailPattern.test(email)) {
-                alert("Invalid email address");
-                return false;
-            }
-
-            // Check password
-            if (!passwordPattern.test(password)) {
-                alert("Invalid password. Password must contain at least 8 characters,");
-                return false;
-            }
-
-            return true; // Form is valid
-        }
-    </script> --}}
 
     <script>
         function validateForm() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            // const passwordr egex = /^(?=.*[a-z]).{8,}$/;
+            const passwordregex = /^[^a-zA-Z]{8}$/;
 
             if (!email.match(emailregex)) {
                 Swal.fire({
@@ -64,7 +40,12 @@
             }
 
             if (!passwordregex.test(password)) {
-                alert('password is full');
+                // alert('password is full');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Input Error',
+                    text: 'Password must be 8 caracter'
+                });
                 return false;
             }
             return true

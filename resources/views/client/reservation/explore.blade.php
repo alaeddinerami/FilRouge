@@ -5,13 +5,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                     <h1 class="text-4xl font-bold mb-4">Your Gateway to Comfort</h1>
-                    <p class="mb-8">We have a wide range of Hotel Rooms, Resorts and villas with exciting deals and
+                    <p class="mb-8">We have a wide range of  Rooms with exciting deals and
                         offers specially for our valuable customers.</p>
                     <form method="POST" action="{{ route('booking') }}" class="flex flex-col space-y-4">
                         @csrf
                         <input type="hidden" name="room_id" value="{{ $rooms->id }}">
+                        <label for="start_date" class="text-gray-700">Start Date</label>
                         <input id="reserved_at" type="date" name="reserved_at" min="{{ now()->format('Y-m-d') }}"
                             class="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-1/2">
+                        <label for="finish_date" class="text-gray-700">Finish Date</label>
                         <input id="finished_at" type="date" name="finished_at"
                             class="border border-gray-300 rounded-md px-4 py-2 w-full sm:w-1/2">
 
@@ -20,7 +22,7 @@
                     </form>
 
 
-                    <div class=" space-y-4 mt-8">
+                    <div class=" space-y-4 mt-8 mb-8">
                         <div class="flex space-x-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 fill="#000000" class="h-8 w-8 mt-2 mr-4" version="1.1" id="Layer_1"
@@ -89,15 +91,7 @@
                                 <p class="text-gray-600">You'll share the bathroom with others.</p>
                             </div>
                         </div>
-                        <div class="flex space-x-2">
-                            <svg class="w-6 h-6mt-2 mr-4" viewBox="0 0 24 24">
-                                <!-- Superhost icon SVG path -->
-                            </svg>
-                            <div>
-                                <h3 class="text-lg font-semibold ">Lisa is a Superhost</h3>
-                                <p class="text-gray-600">Superhosts are experienced, highly rated Hosts.</p>
-                            </div>
-                        </div>
+                        
                     </div>
 
 

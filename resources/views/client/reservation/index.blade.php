@@ -24,7 +24,6 @@
                             <span class="text-lg text-orange-600 text-center font-semibold">{{ $room->price }} $</span>
                         </div>
                     </a>
-                    {{-- @foreach ($favorites as $favorite) --}}
                 @endforeach
             </div>
             <div class="pt-5 ">

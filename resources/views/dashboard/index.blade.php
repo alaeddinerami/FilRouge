@@ -4,8 +4,8 @@
 
 
     <!-- Statistics Cards -->
-    <section class=" pl-24">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ml-40 p-4 gap-4">
+    <section class=" md:pl-24">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:ml-40 p-4 gap-4">
             <div
                 class="bg-blue-300 shadow-lg rounded-full flex items-center justify-between p-3 border-b-4 border-blue-300  text-white font-medium group">
                 <div class="flex justify-center items-center w-14 h-14 bg-white rounded-full ">

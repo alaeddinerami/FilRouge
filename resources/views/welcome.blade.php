@@ -82,16 +82,16 @@
     
         <section class="">
 
-            <div class=" w-full bg-gray-200 p-8 rounded-lg flex flex-col md:flex-row items-center gap-4">
-                <img class="w-full md:w-1/2  rounded-lg " src="/storage/hero.jpg" alt="">
+            <div class=" w-full  bg-gray-200 p-8 rounded-lg flex flex-col md:flex-row md:justify-center items-center gap-20">
+                <img class="w-full md:w-1/3  rounded-lg " src="/images/homePage.jpg" alt="">
 
                 <div class="w-full md:w-1/2">
-                    <h1 class="md:text-3xl text-center font-semibold mb-5">This is One Hand®️ Safi</h1>
-                    <p class="text-center mt-4">Located in the heart of downtown Safi, One hand®️ Safi is the city's
+                    <h1 class="md:text-3xl  font-semibold mb-5">This is One Hand®️ Safi</h1>
+                    <p class=" mt-4">Located in the heart of downtown Safi, One hand®️ Safi is the city's
                         most
                         innovative student accommodation.</p>
 
-                    <p class="text-center mt-4">Conveniently situated near Youcode and other educational institutions,
+                    <p class=" mt-4">Conveniently situated near Youcode and other educational institutions,
                         One
                         hand®️ Safi offers a premier student living experience. Enjoy modern amenities, comfortable
                         accommodations, and a vibrant community atmosphere, all within a secure environment. Whether
@@ -108,7 +108,7 @@
                 <div class="flex items-center justify-center">
                     <div class="max-w-lg w-full bg-gray-200 p-6 rounded-lg">
                         <div class="flex items-center gap-4">
-                            <img class="w-12 h-12 rounded-full" src="/storage/hero.jpg" alt="Student Image">
+                            <img class="w-12 h-12 rounded-full" src="/images/profile.webp" alt="Student Image">
                             <div>
                                 <p class="font-semibold">John Doe</p>
                                 <p class="text-gray-600">March 22, 2024</p>
@@ -121,7 +121,7 @@
                 <div class="flex items-center justify-center">
                     <div class="max-w-lg w-full bg-gray-200 p-6 rounded-lg">
                         <div class="flex items-center gap-4">
-                            <img class="w-12 h-12 rounded-full" src="/storage/hero.jpg" alt="Student Image">
+                            <img class="w-12 h-12 rounded-full" src="/images/profile.webp" alt="Student Image">
                             <div>
                                 <p class="font-semibold">John Doe</p>
                                 <p class="text-gray-600">March 22, 2024</p>
@@ -133,21 +133,16 @@
                 </div>
             </div>
         </section>
+        
         <section class="mt-7">
             <h2 class="font-bold text-center text-xl md:text-3xl mb-8">FAQs</h2>
 
-            <div class="bg-white mx-auto p-6">
+            <div class="bg-white rounded-lg m-8 p-10">
                 <div class="mb-4">
                     <div class="flex items-center justify-between bg-gray-200 pl-3 pr-2 py-3 w-full rounded text-gray-600 font-bold cursor-pointer hover:bg-gray-300"
                         onclick="toggleAnswer(1)">
                         Lorem ipsum dolor sit amet?
-                        <span class="h-6 w-6 flex items-center justify-center text-teal-500">
-                            <svg class="w-3 h-3 fill-current" viewBox="0 -192 469.33333 469"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m437.332031.167969h-405.332031c-17.664062 0-32 14.335937-32 32v21.332031c0 17.664062 14.335938 32 32 32h405.332031c17.664063 0 32-14.335938 32-32v-21.332031c0-17.664063-14.335937-32-32-32zm0 0" />
-                            </svg>
-                        </span>
+                       
                     </div>
                     <div class="p-3" id="answer1" style="display: none;">
                         <p class="text-gray-600 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -164,13 +159,7 @@
                     <div class="flex items-center justify-between bg-gray-200 pl-3 pr-2 py-3 w-full rounded text-gray-600 font-bold cursor-pointer hover:bg-gray-300"
                         onclick="toggleAnswer(2)">
                         Lorem ipsum dolor sit amet?
-                        <span class="h-6 w-6 flex items-center justify-center text-teal-500">
-                            <svg class="w-3 h-3 fill-current" viewBox="0 -192 469.33333 469"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m437.332031.167969h-405.332031c-17.664062 0-32 14.335937-32 32v21.332031c0 17.664062 14.335938 32 32 32h405.332031c17.664063 0 32-14.335938 32-32v-21.332031c0-17.664063-14.335937-32-32-32zm0 0" />
-                            </svg>
-                        </span>
+                      
                     </div>
                     <div class="p-3" id="answer2" style="display: none;">
                         <p class="text-gray-600 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -188,13 +177,7 @@
                     <div class="flex items-center justify-between bg-gray-200 pl-3 pr-2 py-3 w-full rounded text-gray-600 font-bold cursor-pointer hover:bg-gray-300"
                         onclick="toggleAnswer(3)">
                         Lorem ipsum dolor sit amet?
-                        <span class="h-6 w-6 flex items-center justify-center text-teal-500">
-                            <svg class="w-3 h-3 fill-current" viewBox="0 -192 469.33333 469"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="m437.332031.167969h-405.332031c-17.664062 0-32 14.335937-32 32v21.332031c0 17.664062 14.335938 32 32 32h405.332031c17.664063 0 32-14.335938 32-32v-21.332031c0-17.664063-14.335937-32-32-32zm0 0" />
-                            </svg>
-                        </span>
+                       
                     </div>
                     <div class="p-3" id="answer3" style="display: none;">
                         <p class="text-gray-600 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
