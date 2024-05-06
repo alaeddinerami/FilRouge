@@ -28,7 +28,7 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const passwordregex = /^[^a-zA-Z]{8}$/;
+            // const passwordregex = /^[^a-zA-Z]$/;
 
             if (!email.match(emailregex)) {
                 Swal.fire({

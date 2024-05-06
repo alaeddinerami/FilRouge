@@ -308,7 +308,7 @@
                     });
                 } else {
                     $('#articleContainer')
-                        .empty(); // Clear the search results or display a message indicating that the search query is empty
+                        .empty(); 
                 }
             });
         });
